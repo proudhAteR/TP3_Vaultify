@@ -1,5 +1,5 @@
 /* FRAMEWORK */
-@import "vendor/bootstrap-5.3.0/bootstrap.min.css";
+@import "vendor/bootstrap-5.3.3/bootstrap.min.css";
 
 /* ADDITIONAL LIBRARIES */
 @import "vendor/pace-1.2.4/minimal.css";
@@ -11,10 +11,8 @@
 @import "vendor/fontawesome-6.2.1/css/all.min.css";
 @import "vendor/lineicons-3.0/icon-font/lineicons.css";
 
-/* FONTS */
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,700');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700');
-@import url('https://fonts.googleapis.com/css2?family=El+Messiri&family=Montserrat&display=swap');
-
 /* COMPONENTS */
+@import "root.css";
 @import "components/body.css";
+@import "components/headline.css";
+@import "components/navbar.css";
