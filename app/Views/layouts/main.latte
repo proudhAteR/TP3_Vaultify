@@ -9,53 +9,27 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
     {include components/favicon.latte}
     {block meta}{/block}
     <title>{$project_name . ' | ' . $title}</title>
-    <link rel="stylesheet" href="/stylesheets/vendor/bootstrap-5.3.3/bootstrap.min.css"/>
+
     <link rel="stylesheet" href="/stylesheets/style.css"/>
-    <script src="/javascript/vendor/pace-1.2.4/pace.min.js"></script>
-    <script src="/javascript/vendor/tom-select-2.2.2/tom-select.complete.min.js"></script>
+    <script src="/javascripts/main.js" type="module" nonce={$nonce}></script>
 </head>
 <body class="d-grid bg-body-secondary" data-bs-theme="dark">
 
-<div class="sidebar d-flex flex-column gap-3">
-    <div class="d-flex justify-content-between">
-        <img class="d-flex justify-content-start rounded-3 mb-4" src="/assets/images/logo.png" alt="Vaultify" width="64"
-             height="64">
-    </div>
+{include components/sidebar.latte}
 
-    <ul class="list-group d-flex flex-column gap-5">
-        <li class="active"><a href="#"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="#"><i class="fas fa-key"></i> Passwords</a></li>
-        <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
-        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-    </ul>
-</div>
-
-<div class="container">
-    <nav class="navbar bg-body-secondary border-bottom border-1">
-        <div class="container-fluid justify-content-end">
-            <div class="d-flex nav_end gap-4 align-items-center">
-                <img class="d-flex justify-content-start rounded-5" src="/assets/images/logo.png" alt="Vaultify" width="40"
-                     height="40">
-                <button class="btn btn-outline-danger">Disconnect</button>
-            </div>
-        </div>
-    </nav>
-
+<div class="container fade-in">
     {include "zf-flash"}
+
+    {include components/header.latte}
     {block content}{/block}
 
 </div>
-<script src="/public/javascript/vendor/popper-2.11.6/popper.min.js"></script>
-<script src="/public/javascript/vendor/bootstrap-5.3.3/bootstrap.min.js"></script>
-<script src="/public/javascript/vendor/imask-7.0.0/imask.js"></script>
-<script type="module" nonce={$nonce}>
-    import Application from '/public/javascript/app.js';
-
-    let app = new Application({});
-    app.initialize();
-</script>
+<script src="/javascripts/vendor/popper-2.11.6/popper.min.js"></script>
+<script src="/javascripts/vendor/bootstrap-5.3.3/bootstrap.min.js"></script>
+<script src="/javascripts/vendor/imask-7.0.0/imask.js"></script>
 </body>
 </html>

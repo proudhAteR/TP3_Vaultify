@@ -1,8 +1,7 @@
 export default class Application {
-
     #configurations;
 
-    constructor(configurations) {
+    constructor(configurations = {}) {
         this.#configurations = configurations;
     }
 
@@ -14,4 +13,5 @@ export default class Application {
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     }
+
 }

@@ -1,3 +1,4 @@
 h1, h2, h3 {
     font-family: var(--headline-font), sans-serif;
+    margin: 0;
 }
