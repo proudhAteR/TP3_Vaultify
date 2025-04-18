@@ -1,5 +1,5 @@
 <?php
 
-/**
- * Add global project functions here ...
- */
+function login(string $title) : bool {
+    return strcasecmp($title, 'Login') === 0;
+}

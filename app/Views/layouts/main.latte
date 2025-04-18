@@ -19,15 +19,20 @@
 </head>
 <body class="d-grid bg-body-secondary" data-bs-theme="dark">
 
-{include components/sidebar.latte}
+{if !login($title)}
+    {include components/sidebar.latte}
+{/if}
 
 <div class="container fade-in">
     {include "zf-flash"}
 
-    {include components/header.latte}
-    {block content}{/block}
+    {if !login($title)}
+        {include components/header.latte}
+    {/if}
 
+    {block content}{/block}
 </div>
+
 <script src="/javascripts/vendor/popper-2.11.6/popper.min.js"></script>
 <script src="/javascripts/vendor/bootstrap-5.3.3/bootstrap.min.js"></script>
 <script src="/javascripts/vendor/imask-7.0.0/imask.js"></script>
