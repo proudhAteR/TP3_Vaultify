@@ -10,7 +10,7 @@
 
 {define "zf-flash-message", $data, $theme}
     {if $data}
-        <div class="alert alert-{$theme}">
+        <div class="w-50 alert alert-{$theme} mx-auto">
             {if is_array($data) && count($data) > 1}
                 <ul class="mb-0">
                     {foreach $data as $message}

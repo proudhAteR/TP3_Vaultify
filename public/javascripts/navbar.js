@@ -1,8 +1,10 @@
 const navbar = document.getElementById("nav");
-const element = navbar.closest("li");
+const element = navbar?.closest("li");
 const path = window.location.pathname;
 
 export default function listen() {
+    if (!navbar) return;
+
     navbar.addEventListener("click", handleLinks);
     document.addEventListener("DOMContentLoaded", activateRow);
 }
@@ -19,9 +21,9 @@ function activateRow() {
 
 function handleLinks() {
     const activeItems = document.querySelectorAll("li.active");
+
     activeItems.forEach(function (item) {
         item.classList.remove("active");
     });
-
     element.classList.add("active");
 }

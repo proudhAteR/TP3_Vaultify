@@ -1,10 +1,15 @@
 <?php namespace Controllers;
 
 use Models\Core\Entities\Now;
+use Models\Core\Entity;
+use Models\Entities\Token;
+use Models\Exceptions\FormException;
 use Zephyrus\Application\Controller as BaseController;
 use Models\Core\Application;
 use Zephyrus\Application\Configuration;
 use Zephyrus\Application\Flash;
+use Zephyrus\Application\Form;
+use Zephyrus\Network\ContentType;
 use Zephyrus\Network\Response;
 use Zephyrus\Security\ContentSecurityPolicy;
 use Zephyrus\Security\SecureHeader;
@@ -65,6 +70,23 @@ abstract class Controller extends BaseController
         return parent::render($page, $arguments);
     }
 
+    /**
+     * Retrieves the currently loaded language as a string with its country. E.g. "français (Canada)".
+     *
+     * @return string
+     */
+    private function getLoadedLanguage(): string
+    {
+        $localization = Application::getInstance()->getLocalization();
+        $loadedLanguage = "";
+        foreach ($localization->getInstalledLanguages() as $language) {
+            if ($language->locale == $localization->getLocale()) {
+                $loadedLanguage = $language->lang . ' (' . $language->country . ')';
+            }
+        }
+        return $loadedLanguage;
+    }
+
     protected function setupSecurityHeaders(SecureHeader $secureHeader): void
     {
         $csp = new ContentSecurityPolicy();
@@ -84,20 +106,11 @@ abstract class Controller extends BaseController
         $secureHeader->setContentSecurityPolicy($csp);
     }
 
-    /**
-     * Retrieves the currently loaded language as a string with its country. E.g. "français (Canada)".
-     *
-     * @return string
-     */
-    private function getLoadedLanguage(): string
+    protected function make_request(callable $fn, callable $do, string $url = '/', ?Token $token = null): mixed
     {
-        $localization = Application::getInstance()->getLocalization();
-        $loadedLanguage = "";
-        foreach ($localization->getInstalledLanguages() as $language) {
-            if ($language->locale == $localization->getLocale()) {
-                $loadedLanguage = $language->lang . ' (' . $language->country . ')';
-            }
-        }
-        return $loadedLanguage;
+        $f = $this->buildForm();
+        $fn($f, $token);
+
+        return $do($url);
     }
 }
