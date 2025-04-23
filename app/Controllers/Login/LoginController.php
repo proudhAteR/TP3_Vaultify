@@ -3,9 +3,7 @@
 namespace Controllers\Login;
 
 use Controllers\Controller;
-use Models\Core\Entity;
 use Models\Services\AccountService;
-use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 use Zephyrus\Network\Router\Get;
 use Zephyrus\Network\Router\Post;
@@ -17,15 +15,17 @@ class LoginController extends Controller
     #[Get('/')]
     public function index(): Response
     {
-        return $this->render('login', ['title' => 'Login']);
+        return !$this->isAuth() ?
+            $this->render('login', ['title' => 'Login']) :
+            $this->redirectBack($this->request);
     }
 
     #[Post('/')]
     public function authenticate(): Response
     {
-        return $this->make_request(
-            fn: [AccountService::class, 'authenticate'],
-            do: [$this, 'redirect']
-        );
+        $acc = AccountService::authenticate($this->buildForm());
+        $_SESSION["user"] = $acc->id;
+
+        return $this->redirect("/");
     }
 }

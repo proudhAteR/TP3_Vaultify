@@ -9,3 +9,7 @@
     --headline-font: "Bebas Neue";
     --body-font: "Poppins";
 }
+
+.fade-in {
+    animation: appear 0.5s ease-out forwards;
+}

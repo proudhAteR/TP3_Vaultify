@@ -1,4 +1,6 @@
-<?php namespace Controllers\Profile;
+<?php
+
+namespace Controllers\Profile;
 
 use Controllers\Controller;
 use Zephyrus\Network\Response;
@@ -11,6 +13,6 @@ class ProfileController extends Controller
     #[Get('/')]
     public function index(): Response
     {
-        return $this->render("profile", ['title' => 'Profile']);
+        return $this->display("profile", ["title" => "Profile"]);
     }
 }

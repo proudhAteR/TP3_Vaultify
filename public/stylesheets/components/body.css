@@ -4,7 +4,3 @@ body {
     font-family: var(--body-font), sans-serif;
     grid-template-columns: auto 1fr;
 }
-
-.fade-in {
-    animation: appear 0.5s ease-out forwards;
-}

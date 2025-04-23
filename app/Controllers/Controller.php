@@ -1,15 +1,13 @@
-<?php namespace Controllers;
+<?php
+
+namespace Controllers;
 
 use Models\Core\Entities\Now;
-use Models\Core\Entity;
-use Models\Entities\Token;
-use Models\Exceptions\FormException;
+
 use Zephyrus\Application\Controller as BaseController;
 use Models\Core\Application;
 use Zephyrus\Application\Configuration;
 use Zephyrus\Application\Flash;
-use Zephyrus\Application\Form;
-use Zephyrus\Network\ContentType;
 use Zephyrus\Network\Response;
 use Zephyrus\Security\ContentSecurityPolicy;
 use Zephyrus\Security\SecureHeader;
@@ -19,6 +17,35 @@ abstract class Controller extends BaseController
     public function before(): ?Response
     {
         return parent::before();
+    }
+
+    protected function setupSecurityHeaders(SecureHeader $secureHeader): void
+    {
+        $csp = new ContentSecurityPolicy();
+        $csp->setFontSources(["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com']);
+        $csp->setStyleSources(["'self'", 'https://fonts.googleapis.com', ContentSecurityPolicy::UNSAFE_INLINE]);
+        $csp->setScriptSources(["'self'", 'https://ajax.googleapis.com', 'https://maps.googleapis.com',
+            'https://www.google-analytics.com', 'https://cdn.jsdelivr.net']);
+        $csp->setChildSources(["'self'"]);
+        $csp->setWorkerSources(["blob:"]);
+        $csp->setConnectSources(["'self'", 'https://api.mapbox.com', 'https://events.mapbox.com']);
+
+        // Allow Google authenticator image generation
+        $csp->setImageSources(["'self'", 'blob:', 'data:', 'https://chart.googleapis.com', 'https://api.qrserver.com']);
+        $csp->setBaseUri([$this->request->getUrl()->getBaseUrl()]);
+
+        // Add custom CSP
+        $secureHeader->setContentSecurityPolicy($csp);
+    }
+
+    protected function display(string $page, array $args, string $url = "/login"): Response
+    {
+        return $this->isAuth() ? $this->render($page, $args) : $this->redirect($url);
+    }
+
+    protected function isAuth(): bool
+    {
+        return isset($_SESSION["user"]);
     }
 
     public function render(string $page, array $args = []): Response
@@ -87,30 +114,4 @@ abstract class Controller extends BaseController
         return $loadedLanguage;
     }
 
-    protected function setupSecurityHeaders(SecureHeader $secureHeader): void
-    {
-        $csp = new ContentSecurityPolicy();
-        $csp->setFontSources(["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com']);
-        $csp->setStyleSources(["'self'", 'https://fonts.googleapis.com', ContentSecurityPolicy::UNSAFE_INLINE]);
-        $csp->setScriptSources(["'self'", 'https://ajax.googleapis.com', 'https://maps.googleapis.com',
-            'https://www.google-analytics.com', 'https://cdn.jsdelivr.net']);
-        $csp->setChildSources(["'self'"]);
-        $csp->setWorkerSources(["blob:"]);
-        $csp->setConnectSources(["'self'", 'https://api.mapbox.com', 'https://events.mapbox.com']);
-
-        // Allow Google authenticator image generation
-        $csp->setImageSources(["'self'", 'blob:', 'data:', 'https://chart.googleapis.com', 'https://api.qrserver.com']);
-        $csp->setBaseUri([$this->request->getUrl()->getBaseUrl()]);
-
-        // Add custom CSP
-        $secureHeader->setContentSecurityPolicy($csp);
-    }
-
-    protected function make_request(callable $fn, callable $do, string $url = '/', ?Token $token = null): mixed
-    {
-        $f = $this->buildForm();
-        $fn($f, $token);
-
-        return $do($url);
-    }
 }
