@@ -40,4 +40,16 @@ class AccountService
         $f->addError('not good', 'The username or password you entered may not be valid.');
         throw new FormException($f);
     }
+
+    public static function getUser(): ?Account
+    {
+        return isAuth() ? self::build_user() : null;
+    }
+
+    private static function build_user(): Account
+    {
+        return AccountService::build_account(
+            new AccountBroker()->findById($_SESSION["user"])
+        );
+    }
 }

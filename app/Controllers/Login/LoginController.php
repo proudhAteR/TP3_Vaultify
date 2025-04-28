@@ -15,8 +15,13 @@ class LoginController extends Controller
     #[Get('/')]
     public function index(): Response
     {
-        return !$this->isAuth() ?
-            $this->render('login', ['title' => 'Login']) :
+        return $this->display('login', ['title' => 'Login']);
+    }
+
+    protected function display(string $page, array $args, string $url = "/login"): Response
+    {
+        return !isAuth() ?
+            $this->render($page, $args) :
             $this->redirectBack($this->request);
     }
 

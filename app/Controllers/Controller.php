@@ -40,12 +40,7 @@ abstract class Controller extends BaseController
 
     protected function display(string $page, array $args, string $url = "/login"): Response
     {
-        return $this->isAuth() ? $this->render($page, $args) : $this->redirect($url);
-    }
-
-    protected function isAuth(): bool
-    {
-        return isset($_SESSION["user"]);
+        return isAuth() ? $this->render($page, $args) : $this->redirect($url);
     }
 
     public function render(string $page, array $args = []): Response
