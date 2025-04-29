@@ -1,10 +1,12 @@
 {layout layouts/main.latte}
 
 {varType string $username}
+{varType int $size}
 
 {var $cards = [
-['title' => 'Vaults Overview', 'body' => 'You have 45 stored vaults.', 'color' => 'primary'],
+['title' => 'Vaults Overview', 'body' =>"You have {$size} stored vaults.", 'color' => 'primary'],
 ['title' => 'Security Alert', 'body' => '3 passwords are weak.', 'color' => 'danger'],
+['title' => 'Security Alert', 'body' => '3 passwords are weak.', 'color' => 'success']
 ]}
 
 {var $actions = [
@@ -25,7 +27,9 @@
                 {include layouts/components/card.latte,
                 card_title => $card['title'],
                 card_body => $card['body'],
-                color => $card['color']}
+                color => $card['color'],
+                s => 12/count($cards),
+                }
             {/foreach}
         </div>
 

@@ -1,6 +1,7 @@
 <?php namespace Controllers\Home;
 
 use Controllers\AppController;
+use Models\Brokers\VaultBroker;
 use Models\Services\AccountService;
 use Zephyrus\Network\Response;
 use Zephyrus\Network\Router\Get;
@@ -11,12 +12,13 @@ class HomeController extends AppController
     public function index(): Response
     {
         $username = AccountService::getUser()->username ?? "";
-
+        $vaults = new VaultBroker()->find() ?? [];
         return $this->display(
             "home",
             [
                 "title" => "Home",
-                "username" => $username
+                "username" => $username,
+                "size" => count($vaults),
             ]
         );
     }

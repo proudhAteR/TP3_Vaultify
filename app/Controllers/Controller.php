@@ -14,10 +14,6 @@ use Zephyrus\Security\SecureHeader;
 
 abstract class Controller extends BaseController
 {
-    public function before(): ?Response
-    {
-        return parent::before();
-    }
 
     protected function setupSecurityHeaders(SecureHeader $secureHeader): void
     {
@@ -44,7 +40,7 @@ abstract class Controller extends BaseController
         $arguments = array_merge($args, [
 
             /**
-             * Previous page the user accessed.
+             * The Previous page the user accessed.
              */
             "referer" => $this->request->getReferer(),
 
@@ -54,7 +50,7 @@ abstract class Controller extends BaseController
             "route_root" => $this->request->getRouteDefinition()->getRouteRoot(),
 
             /**
-             * String representation of the currently loaded language (e.g. français (Canada)).
+             * String representation of the currently loaded language (e.g., français (Canada)).
              */
             "loaded_language" => $this->getLoadedLanguage(),
             "loaded_locale" => Application::getInstance()->getLocalization()->getLocale(),

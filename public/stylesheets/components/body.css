@@ -3,7 +3,7 @@ body {
     font-size: 1rem;
     font-family: var(--body-font), sans-serif;
     grid-template-columns: auto 1fr;
-    overflow-wrap: break-word; /* Modern */
+    overflow-wrap: break-word;
 }
 
 img, video, iframe {
@@ -13,5 +13,13 @@ img, video, iframe {
 
 .container-fluid, .container, .main-content {
     max-width: 100%;
-    overflow-x: auto; /* If content is too big, allow it to scroll inside, not body */
+    overflow-x: auto;
+}
+
+.btn-link{
+    cursor: pointer;
+}
+
+small{
+    overflow-wrap: break-word;
 }

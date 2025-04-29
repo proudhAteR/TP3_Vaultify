@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers\Login;
+namespace Controllers\Authentication;
 
 use Controllers\AppController;
 use Models\Services\AccountService;
@@ -10,7 +10,7 @@ use Zephyrus\Network\Router\Post;
 use Zephyrus\Network\Router\Root;
 
 #[Root('/login')]
-class LoginController extends AppController
+class LoginController extends AuthenticationController
 {
     #[Get('/')]
     public function index(): Response
@@ -18,19 +18,10 @@ class LoginController extends AppController
         return $this->display('login', ['title' => 'Login']);
     }
 
-    protected function display(string $page, array $args, string $url = "/login"): Response
-    {
-        return !isAuth() ?
-            $this->render($page, $args) :
-            $this->redirectBack($this->request);
-    }
-
     #[Post('/')]
     public function authenticate(): Response
     {
         $acc = AccountService::authenticate($this->buildForm());
-        self::connect($acc->id);
-
-        return $this->redirect("/");
+        return $this->connect($acc->id);
     }
 }

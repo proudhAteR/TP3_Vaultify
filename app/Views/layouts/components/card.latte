@@ -1,8 +1,9 @@
 {varType string $card_title}
 {varType string $card_body}
 {varType string $color}
+{varType string $s}
 
-<div class="col-md-6">
+<div class="col-md-{$s}">
     <div class="card text-bg-{$color} h-100">
         <div class="card-body">
             <h5 class="card-title">{$card_title}</h5>

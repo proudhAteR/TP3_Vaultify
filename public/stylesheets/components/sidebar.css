@@ -26,5 +26,6 @@
 
     &:hover {
         background-color: var(--hover);
+        cursor: pointer;
     }
 }
