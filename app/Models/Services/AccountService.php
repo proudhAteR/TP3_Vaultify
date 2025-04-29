@@ -4,8 +4,8 @@ namespace Models\Services;
 
 use Models\Brokers\AccountBroker;
 use Models\Entities\Account;
-use Models\Exceptions\FormException;
-use Models\Validators\AccountValidator;
+use Models\Validators\LoginValidator;
+use Models\Validators\RegistrationValidator;
 use stdClass;
 use Zephyrus\Application\Form;
 
@@ -13,7 +13,7 @@ class AccountService
 {
     public static function authenticate(Form $form): ?Account
     {
-        AccountValidator::assert($form);
+        LoginValidator::assert($form);
 
         $submitted = self::build_account($form->buildObject());
         $account = self::build_account(
@@ -22,23 +22,29 @@ class AccountService
             )
         );
 
-        if (!verify(
-            $submitted->password,
-            $account->password
-        )) self::handle_error($form);
+        LoginValidator::verifyCredentials($submitted->password, $account->password, $form);
 
         return $account;
+    }
+
+    public static function register(Form $form): ?Account
+    {
+        RegistrationValidator::assert($form);
+
+        $account = self::build_account(
+            $form->buildObject()
+        );
+
+        new AccountBroker()->create($account);
+
+        return self::build_account(
+            new AccountBroker()->findByName($account->username)
+        );
     }
 
     public static function build_account(?stdClass $object): ?Account
     {
         return $object ? Account::build($object) : null;
-    }
-
-    private static function handle_error(Form $f)
-    {
-        $f->addError('not good', 'The username or password you entered may not be valid.');
-        throw new FormException($f);
     }
 
     public static function getUser(): ?Account

@@ -38,11 +38,6 @@ abstract class Controller extends BaseController
         $secureHeader->setContentSecurityPolicy($csp);
     }
 
-    protected function display(string $page, array $args, string $url = "/login"): Response
-    {
-        return isAuth() ? $this->render($page, $args) : $this->redirect($url);
-    }
-
     public function render(string $page, array $args = []): Response
     {
         $projectName = Configuration::getApplication('project');

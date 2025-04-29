@@ -1,11 +1,11 @@
 <?php namespace Controllers\Home;
 
-use Controllers\Controller;
+use Controllers\AppController;
 use Models\Services\AccountService;
 use Zephyrus\Network\Response;
 use Zephyrus\Network\Router\Get;
 
-class HomeController extends Controller
+class HomeController extends AppController
 {
     #[Get("/")]
     public function index(): Response

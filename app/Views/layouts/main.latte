@@ -19,14 +19,14 @@
 </head>
 <body class="d-grid bg-body-secondary" data-bs-theme="dark">
 
-{if !login($title)}
+{if can_display($title)}
     {include components/sidebar.latte}
 {/if}
 
 <div class="container-fluid fade-in px-5">
     {include "zf-flash"}
 
-    {if !login($title)}
+    {if can_display($title)}
         {include components/header.latte}
     {/if}
 

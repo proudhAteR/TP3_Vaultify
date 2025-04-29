@@ -14,5 +14,10 @@ class CustomRule extends Rule
         }, $message);
     }
 
-
+    public static function notUsed(string $message): Rule
+    {
+        return new Rule(function (string $username) {
+            return new AccountBroker()->findByName($username) == null;
+        }, $message);
+    }
 }

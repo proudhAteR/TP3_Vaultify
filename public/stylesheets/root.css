@@ -13,3 +13,7 @@
 .fade-in {
     animation: appear 0.5s ease-out forwards;
 }
+
+i {
+    margin-right: 10px;
+}

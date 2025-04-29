@@ -9,13 +9,13 @@ use Zephyrus\Network\Router\Get;
 use Zephyrus\Network\Router\Post;
 use Zephyrus\Network\Router\Root;
 
-#[Root('/login')]
-class LoginController extends AppController
+#[Root("/register")]
+class RegistrationController extends AppController
 {
     #[Get('/')]
     public function index(): Response
     {
-        return $this->display('login', ['title' => 'Login']);
+        return $this->display('Register', ['title' => 'Register']);
     }
 
     protected function display(string $page, array $args, string $url = "/login"): Response
@@ -26,10 +26,18 @@ class LoginController extends AppController
     }
 
     #[Post('/')]
-    public function authenticate(): Response
+    public function register(): Response
     {
-        $acc = AccountService::authenticate($this->buildForm());
-        self::connect($acc->id);
+        $acc = AccountService::register(
+            $this->buildForm()
+        );
+
+        if (is_null($acc) || !isset($acc->id)) {
+            echo "oh oh :3";
+            exit();
+        }
+
+        $this->connect($acc->id);
 
         return $this->redirect("/");
     }

@@ -7,16 +7,18 @@
             <h3 class="text-center mb-4">{$title}</h3>
 
             {include layouts/components/auth_form.latte,
-            action => '/login',
-            button => 'Login',
+            action => '/register',
+            button => 'Register',
             fields => [
+            ['label' => 'Mail', 'type' => 'email', 'id' => 'mail', 'name' => 'mail'],
             ['label' => 'Username', 'type' => 'text', 'id' => 'username', 'name' => 'username'],
-            ['label' => 'Password', 'type' => 'password', 'id' => 'password', 'name' => 'password']
-                ]
+            ['label' => 'Password', 'type' => 'password', 'id' => 'password', 'name' => 'password'],
+            ['label' => 'Confirm Password', 'type' => 'password', 'id' => 'confirm_password', 'name' => 'confirm_password']
+            ]
             }
 
             <div class="text-center mt-3">
-                Do not have an account? <a href="/register" class="text-decoration-underline text-light">Register</a>
+                Already have an account? <a href="/login" class="text-decoration-underline text-light">Login</a>
             </div>
         </div>
     </div>

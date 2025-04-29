@@ -1,6 +1,17 @@
 body {
-    font-weight: 300;
+    font-weight: 200;
     font-size: 1rem;
     font-family: var(--body-font), sans-serif;
     grid-template-columns: auto 1fr;
+    overflow-wrap: break-word; /* Modern */
+}
+
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+.container-fluid, .container, .main-content {
+    max-width: 100%;
+    overflow-x: auto; /* If content is too big, allow it to scroll inside, not body */
 }
