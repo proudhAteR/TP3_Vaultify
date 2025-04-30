@@ -15,7 +15,7 @@ class VaultsController extends AppController
     #[Get('/')]
     public function index(): Response
     {
-        $v = new VaultBroker()->find() ?? [];
+        $v = new VaultBroker()->find();
 
         return $this->display(
             "vaults",

@@ -11,6 +11,7 @@ class HomeController extends AppController
     #[Get("/")]
     public function index(): Response
     {
+        //TODO: User profile picture from the assets using the path
         $username = AccountService::getUser()->username ?? "";
         $vaults = new VaultBroker()->find() ?? [];
         return $this->display(
@@ -18,7 +19,7 @@ class HomeController extends AppController
             [
                 "title" => "Home",
                 "username" => $username,
-                "size" => count($vaults),
+                "vaults" => $vaults,
             ]
         );
     }

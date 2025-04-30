@@ -7,7 +7,7 @@ export default function togglePassword() {
             const password = span.getAttribute('data-password');
             const isHidden = !span.hasAttribute('data-visible');
 
-            span.textContent = isHidden ? password : '•'.repeat(password.length);
+            span.textContent = isHidden ? password : '•'.repeat(8);
             btn.textContent = isHidden ? 'Hide' : 'Show';
 
             if (isHidden) {

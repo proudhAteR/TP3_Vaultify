@@ -4,7 +4,6 @@ namespace Models\Brokers;
 
 use Models\Entities\Vault;
 use Models\Services\AccountService;
-use stdClass;
 use Zephyrus\Database\DatabaseBroker;
 use Zephyrus\Security\Cryptography;
 
@@ -12,7 +11,8 @@ class VaultBroker extends DatabaseBroker
 {
     public function find(): array
     {
-        return $this->select("SELECT * FROM vault WHERE account_id = ?", [AccountService::getUser()->id]);
+        $user = AccountService::getUser()->id;
+        return $user ? $this->select("SELECT * FROM vault WHERE account_id = ?", [$user]) : [];
     }
 
     public function create(Vault $vault): void

@@ -1,12 +1,12 @@
 {layout layouts/main.latte}
 
 {varType string $username}
-{varType int $size}
+{varType array $vaults}
 
 {var $cards = [
-['title' => 'Vaults Overview', 'body' =>"You have {$size} stored vaults.", 'color' => 'primary'],
+['title' => 'Vaults Overview', 'body' => 'You have ' . count($vaults) . ' stored vault(s).', 'color' => 'primary'],
 ['title' => 'Security Alert', 'body' => '3 passwords are weak.', 'color' => 'danger'],
-['title' => 'Security Alert', 'body' => '3 passwords are weak.', 'color' => 'success']
+['title' => 'New Feature', 'body' => 'Vaultify now supports MFA.', 'color' => 'success']
 ]}
 
 {var $actions = [
