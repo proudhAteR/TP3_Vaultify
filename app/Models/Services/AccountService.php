@@ -23,14 +23,10 @@ class AccountService
             )
         );
 
-        LoginValidator::verifyCredentials(
+        LoginValidator::verify(
             $submitted->password,
             $account->password,
             $form
-        );
-
-        EncryptionService::storeKey(
-            EncryptionService::deriveUserKey($account)
         );
 
         return $account;
@@ -56,7 +52,7 @@ class AccountService
         return $object ? Account::build($object) : null;
     }
 
-    public static function getUser(): ?Account
+    public static function get_user(): ?Account
     {
         return self::build_user();
     }
@@ -68,5 +64,23 @@ class AccountService
         return $id ? AccountService::build_account(
             new AccountBroker()->findById($id)
         ) : null;
+    }
+
+    public static function connect(Account $acc): void
+    {
+        self::store_key($acc);
+        self::store_user($acc);
+    }
+
+    private static function store_key(Account $account): void
+    {
+        Session::set(
+            "key", EncryptionService::deriveUserKey($account)
+        );
+    }
+
+    private static function store_user(Account $account): void
+    {
+        Session::set("user", $account->id);
     }
 }

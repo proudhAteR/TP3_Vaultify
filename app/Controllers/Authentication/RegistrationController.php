@@ -21,6 +21,6 @@ class RegistrationController extends AuthenticationController
     public function register(): Response
     {
         $acc = AccountService::register($this->buildForm());
-        return $this->connect($acc->id);
+        return $this->connect($acc);
     }
 }

@@ -11,7 +11,7 @@ class VaultBroker extends DatabaseBroker
 {
     public function find(): array
     {
-        $user = AccountService::getUser()?->id;
+        $user = AccountService::get_user()?->id;
         return $user ? $this->select("SELECT * FROM vault WHERE account_id = ?", [$user]) : [];
     }
 

@@ -15,7 +15,7 @@ class HomeController extends AppController
             "home",
             [
                 "title" => "Home",
-                "username" => AccountService::getUser()?->username,
+                "username" => AccountService::get_user()?->username,
                 "vaults" => new VaultBroker()->find() ?? [],
             ]
         );

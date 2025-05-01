@@ -22,7 +22,7 @@ class LoginValidator extends BaseAccountValidator
         }
     }
 
-    public static function verifyCredentials(string $submitted, string $stored, Form $form): void
+    public static function verify(string $submitted, string $stored, Form $form): void
     {
         if (!verify($submitted, $stored)) {
             $form->addError('not good', self::$credentials_error_message);

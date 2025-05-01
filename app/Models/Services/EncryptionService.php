@@ -8,11 +8,6 @@ use Zephyrus\Security\Cryptography;
 
 class EncryptionService
 {
-    public static function storeKey(string $key): void
-    {
-        Session::set("key", $key);
-    }
-
     public static function getKey()
     {
         return Session::get("key");

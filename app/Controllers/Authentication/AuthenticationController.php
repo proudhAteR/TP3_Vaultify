@@ -3,6 +3,8 @@
 namespace Controllers\Authentication;
 
 use Controllers\AppController;
+use Models\Entities\Account;
+use Models\Services\AccountService;
 use Zephyrus\Core\Session;
 use Zephyrus\Network\Response;
 
@@ -15,9 +17,9 @@ class AuthenticationController extends AppController
             $this->redirectBack($this->request);
     }
 
-    protected function connect(int $id): Response
+    protected function connect(Account $acc): Response
     {
-        Session::set("user", $id);
+        AccountService::connect($acc);
         return $this->redirect("/");
     }
 }

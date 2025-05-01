@@ -21,6 +21,6 @@ class LoginController extends AuthenticationController
     public function authenticate(): Response
     {
         $acc = AccountService::authenticate($this->buildForm());
-        return $this->connect($acc->id);
+        return $this->connect($acc);
     }
 }
