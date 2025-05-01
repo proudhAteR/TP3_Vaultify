@@ -2,7 +2,6 @@
 
 namespace Controllers\Authentication;
 
-use Controllers\AppController;
 use Models\Services\AccountService;
 use Zephyrus\Network\Response;
 use Zephyrus\Network\Router\Get;

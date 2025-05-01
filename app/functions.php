@@ -13,8 +13,3 @@ function verify(string $clear, string $hash): bool
 {
     return Cryptography::verifyHashedPassword($clear, $hash);
 }
-
-function isAuth(): bool
-{
-    return isset($_SESSION["user"]);
-}

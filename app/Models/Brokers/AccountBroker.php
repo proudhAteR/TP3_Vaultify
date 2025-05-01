@@ -3,6 +3,7 @@
 namespace Models\Brokers;
 
 use Models\Entities\Account;
+use Models\Services\EncryptionService;
 use stdClass;
 use Zephyrus\Database\DatabaseBroker;
 use Zephyrus\Security\Cryptography;
@@ -31,9 +32,10 @@ class AccountBroker extends DatabaseBroker
 
     public function create(Account $account): void
     {
-        $this->query("INSERT INTO account (username, mail, password) VALUES (?, ?, ?)", [
+        $this->query("INSERT INTO account (username, mail, salt, password) VALUES (?, ?, ?, ?)", [
             $account->username,
             $account->mail,
+            EncryptionService::createSalt(),
             Cryptography::hashPassword(
                 $account->password
             )

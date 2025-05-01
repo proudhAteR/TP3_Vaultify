@@ -4,14 +4,14 @@ namespace Models\Brokers;
 
 use Models\Entities\Vault;
 use Models\Services\AccountService;
+use Models\Services\EncryptionService;
 use Zephyrus\Database\DatabaseBroker;
-use Zephyrus\Security\Cryptography;
 
 class VaultBroker extends DatabaseBroker
 {
     public function find(): array
     {
-        $user = AccountService::getUser()->id;
+        $user = AccountService::getUser()?->id;
         return $user ? $this->select("SELECT * FROM vault WHERE account_id = ?", [$user]) : [];
     }
 
@@ -21,8 +21,9 @@ class VaultBroker extends DatabaseBroker
             $vault->account_id,
             $vault->name,
             $vault->username,
-            Cryptography::encrypt(
+            EncryptionService::encrypt(
                 $vault->password,
+                EncryptionService::getKey()
             )
         ]);
     }

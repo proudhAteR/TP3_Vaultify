@@ -3,18 +3,18 @@ CREATE TABLE account
     id       INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username TEXT NOT NULL,
     mail     TEXT NOT NULL,
+    salt     TEXT NOT NULL,
     password TEXT NOT NULL
-
 );
 
 CREATE TABLE vault
 (
-    id          INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    account_id  INT  NOT NULL,
-    name        TEXT NOT NULL,
-    username TEXT NOT NULL,
-    password TEXT NOT NULL,
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id         INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    account_id INT  NOT NULL,
+    name       TEXT NOT NULL,
+    username   TEXT NOT NULL,
+    password   TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE
 );

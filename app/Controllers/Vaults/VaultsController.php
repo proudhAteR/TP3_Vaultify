@@ -4,11 +4,10 @@ namespace Controllers\Vaults;
 
 use Controllers\AppController;
 use Models\Brokers\VaultBroker;
+use Models\Services\EncryptionService;
 use Zephyrus\Network\Response;
 use Zephyrus\Network\Router\Get;
 use Zephyrus\Network\Router\Root;
-use Zephyrus\Security\Cryptography;
-
 #[Root('/vaults')]
 class VaultsController extends AppController
 {
@@ -23,7 +22,7 @@ class VaultsController extends AppController
                 'title' => "Vaults",
                 'vaults' => $v,
                 'f' => function (string $pwd): string {
-                    return Cryptography::decrypt($pwd) ?? "";
+                    return EncryptionService::decrypt($pwd);
                 }
             ]
         );

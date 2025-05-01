@@ -8,6 +8,7 @@ use Models\Validators\LoginValidator;
 use Models\Validators\RegistrationValidator;
 use stdClass;
 use Zephyrus\Application\Form;
+use Zephyrus\Core\Session;
 
 class AccountService
 {
@@ -22,7 +23,15 @@ class AccountService
             )
         );
 
-        LoginValidator::verifyCredentials($submitted->password, $account->password, $form);
+        LoginValidator::verifyCredentials(
+            $submitted->password,
+            $account->password,
+            $form
+        );
+
+        EncryptionService::storeKey(
+            EncryptionService::deriveUserKey($account)
+        );
 
         return $account;
     }
@@ -49,13 +58,15 @@ class AccountService
 
     public static function getUser(): ?Account
     {
-        return isAuth() ? self::build_user() : null;
+        return self::build_user();
     }
 
-    private static function build_user(): Account
+    private static function build_user(): ?Account
     {
-        return AccountService::build_account(
-            new AccountBroker()->findById($_SESSION["user"])
-        );
+        $id = Session::get("user");
+
+        return $id ? AccountService::build_account(
+            new AccountBroker()->findById($id)
+        ) : null;
     }
 }

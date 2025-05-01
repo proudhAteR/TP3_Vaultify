@@ -3,7 +3,6 @@
 namespace Controllers\Profile;
 
 use Controllers\AppController;
-use Controllers\Controller;
 use Zephyrus\Network\Response;
 use Zephyrus\Network\Router\Get;
 use Zephyrus\Network\Router\Root;
