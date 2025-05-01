@@ -16,7 +16,9 @@ class AccountService
     {
         LoginValidator::assert($form);
 
-        $submitted = self::build_account($form->buildObject());
+        $submitted = self::build_account(
+            $form->buildObject()
+        );
         $account = self::build_account(
             new AccountBroker()->findByName(
                 $submitted->username
@@ -59,28 +61,37 @@ class AccountService
 
     private static function build_user(): ?Account
     {
-        $id = Session::get("user");
+        $id = self::retrieve_user();
 
         return $id ? AccountService::build_account(
             new AccountBroker()->findById($id)
         ) : null;
     }
 
-    public static function connect(Account $acc): void
+    public static function connect(Account $acc, Form $form): void
     {
-        self::store_key($acc);
-        self::store_user($acc);
+        self::store_key(
+            $form->getValue("password"),
+            $acc->salt
+        );
+        self::store_user($acc->id);
     }
 
-    private static function store_key(Account $account): void
+    private static function store_key(string $p, string $s): void
     {
         Session::set(
-            "key", EncryptionService::deriveUserKey($account)
+            "key",
+            EncryptionService::generate_key($p, $s)
         );
     }
 
-    private static function store_user(Account $account): void
+    private static function store_user(int $id): void
     {
-        Session::set("user", $account->id);
+        Session::set("user", $id);
+    }
+
+    private static function retrieve_user(): ?int
+    {
+        return Session::get("user");
     }
 }

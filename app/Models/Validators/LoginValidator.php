@@ -6,6 +6,7 @@ use Models\Exceptions\FormException;
 use Models\Rules\CustomRule;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
+use Zephyrus\Security\Cryptography;
 
 class LoginValidator extends BaseAccountValidator
 {
@@ -24,9 +25,14 @@ class LoginValidator extends BaseAccountValidator
 
     public static function verify(string $submitted, string $stored, Form $form): void
     {
-        if (!verify($submitted, $stored)) {
-            $form->addError('not good', self::$credentials_error_message);
+        if (!self::verify_cred($submitted, $stored)) {
+            $form->addError('', self::$credentials_error_message);
             throw new FormException($form);
         }
+    }
+
+    private static function verify_cred(string $clear, string $hash): bool
+    {
+        return Cryptography::verifyHashedPassword($clear, $hash);
     }
 }

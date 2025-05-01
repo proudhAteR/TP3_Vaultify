@@ -20,7 +20,9 @@ class RegistrationController extends AuthenticationController
     #[Post('/')]
     public function register(): Response
     {
-        $acc = AccountService::register($this->buildForm());
-        return $this->connect($acc);
+        $form = $this->buildForm();
+        $acc = AccountService::register($form);
+
+        return $this->connect($acc, $form);
     }
 }

@@ -14,13 +14,11 @@ class VaultsController extends AppController
     #[Get('/')]
     public function index(): Response
     {
-        $v = new VaultBroker()->find();
-
         return $this->display(
             "vaults",
             [
                 'title' => "Vaults",
-                'vaults' => $v,
+                'vaults' => new VaultBroker()->find(),
                 'f' => function (string $pwd): string {
                     return EncryptionService::decrypt($pwd);
                 }

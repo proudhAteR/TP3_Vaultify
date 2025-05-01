@@ -35,7 +35,7 @@ class AccountBroker extends DatabaseBroker
         $this->query("INSERT INTO account (username, mail, salt, password) VALUES (?, ?, ?, ?)", [
             $account->username,
             $account->mail,
-            EncryptionService::createSalt(),
+            EncryptionService::generate_salt(),
             Cryptography::hashPassword(
                 $account->password
             )

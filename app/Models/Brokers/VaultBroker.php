@@ -23,7 +23,7 @@ class VaultBroker extends DatabaseBroker
             $vault->username,
             EncryptionService::encrypt(
                 $vault->password,
-                EncryptionService::getKey()
+                EncryptionService::get_key()
             )
         ]);
     }

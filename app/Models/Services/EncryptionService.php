@@ -2,36 +2,35 @@
 
 namespace Models\Services;
 
-use Models\Entities\Account;
 use Zephyrus\Core\Session;
 use Zephyrus\Security\Cryptography;
 
 class EncryptionService
 {
-    public static function getKey()
+    public static function get_key() : ?string
     {
         return Session::get("key");
     }
 
-    public static function createSalt(): string
+    public static function generate_salt(): string
     {
         return Cryptography::randomHex(32);
     }
 
-    public static function deriveUserKey(Account $user): string
+    public static function generate_key(string $password, string $salt): string
     {
-        return Cryptography::deriveEncryptionKey($user->password, $user->salt);
+        return Cryptography::deriveEncryptionKey($password, $salt);
     }
 
     public static function encrypt(string $clearText, ?string $key = null): string
     {
-        $key ??= Session::get("key");
+        $key ??= self::get_key();
         return Cryptography::encrypt($clearText, $key);
     }
 
-    public static function decrypt($clearText, ?string $key = null): string
+    public static function decrypt(string $clearText, ?string $key = null): string
     {
-        $key ??= Session::get("key");
-        return Cryptography::decrypt($clearText, $key) ?? self::createSalt();
+        $key ??= self::get_key();
+        return Cryptography::decrypt($clearText, $key) ?? "U cannot decrypt this u silly banana :3";
     }
 }

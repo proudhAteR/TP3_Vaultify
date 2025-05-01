@@ -20,7 +20,9 @@ class LoginController extends AuthenticationController
     #[Post('/')]
     public function authenticate(): Response
     {
-        $acc = AccountService::authenticate($this->buildForm());
-        return $this->connect($acc);
+        $form = $this->buildForm();
+        $acc = AccountService::authenticate($form);
+
+        return $this->connect($acc, $form);
     }
 }
