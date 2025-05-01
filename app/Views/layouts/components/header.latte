@@ -1,4 +1,5 @@
 {varType string $title}
+{varType string $profile_path}
 
 <nav class="navbar bg-body-secondary border-bottom border-1 my-4">
     <div class="d-flex container-fluid align-items-center justify-content-between p-0">
@@ -6,7 +7,7 @@
             <h1 class="m-0">{$title}</h1>
         </div>
         <div class="d-flex nav_end gap-4 ">
-            <img class="d-flex justify-content-start rounded-5" src="/assets/images/logo.png" alt="Vaultify"
+            <img class="d-flex justify-content-start rounded-5" src="/assets/images/users/{$profile_path}" alt="User avatar"
                  width="40"
                  height="40">
             <form method="post" action="/disconnect" class="m-0">
