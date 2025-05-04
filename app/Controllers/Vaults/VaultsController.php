@@ -19,7 +19,7 @@ class VaultsController extends AppController
             [
                 'title' => "Vaults",
                 'vaults' => new VaultBroker()->find(),
-                'f' => function (string $pwd): string {
+                'decrypt' => function (string $pwd): string {
                     return EncryptionService::decrypt($pwd);
                 }
             ]
