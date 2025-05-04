@@ -13,3 +13,8 @@ function get_profile(): string
 {
     return AccountService::get_user()->profile;
 }
+
+function is_profile(string $page): bool
+{
+    return strcasecmp($page, 'Profile') === 0;
+}

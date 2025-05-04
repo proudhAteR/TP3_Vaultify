@@ -14,7 +14,7 @@ class RegistrationController extends AuthenticationController
     #[Get('/')]
     public function index(): Response
     {
-        return $this->display('Register', ['title' => 'Register']);
+        return $this->display(page: 'Register', args: ['title' => 'Register']);
     }
 
     #[Post('/')]

@@ -2,7 +2,6 @@
 
 namespace Models\Entities;
 
-use DateTime;
 use Models\Core\Entity;
 
 class Vault extends Entity
@@ -12,5 +11,5 @@ class Vault extends Entity
     public string $name;
     public string $username;
     public string $password;
-    public DateTime $created_at;
+    public string $date;
 }

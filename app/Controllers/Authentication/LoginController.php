@@ -14,7 +14,7 @@ class LoginController extends AuthenticationController
     #[Get('/')]
     public function index(): Response
     {
-        return $this->display('login', ['title' => 'Login']);
+        return $this->display(page: 'login', args: ['title' => 'Login']);
     }
 
     #[Post('/')]

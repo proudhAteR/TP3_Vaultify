@@ -15,7 +15,7 @@ CREATE TABLE vault
     name       TEXT NOT NULL,
     username   TEXT NOT NULL,
     password   TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date       TIMESTAMP DEFAULT CURRENT_DATE,
 
     FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE
 );

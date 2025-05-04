@@ -1,4 +1,4 @@
-INSERT INTO vault (account_id, name, username, password, created_at)
+INSERT INTO vault (account_id, name, username, password, date)
 VALUES (1, 'Mail', 'monke_mail',
         'ZWJiM2IwMzlhNzZmOTdhMGZiOGZmZmE5Y2ZkZTExMWYzY2NjMDlhNmNiNWFiYmRiOGI3NjkzOTQ4MjM3NjkzMc49Nt0yOeA79ETlYgc9hegrX33qLgsZMoEVyLvKSUe0',
         '2025-04-01 10:00:00'),

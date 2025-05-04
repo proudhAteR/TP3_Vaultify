@@ -1,4 +1,4 @@
-export default function togglePassword() {
+export function togglePassword() {
     document.querySelectorAll('[data-show]').forEach(btn => {
         btn.addEventListener('click', () => {
             const span = btn.previousElementSibling;
@@ -16,6 +16,22 @@ export default function togglePassword() {
             }
 
             span.removeAttribute('data-visible');
+        });
+    });
+}
+
+export function focusOnManage() {
+    document.querySelectorAll('[data-manage]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modalSelector = btn.getAttribute('data-bs-target');
+            const modal = document.querySelector(modalSelector);
+
+            const instance = bootstrap.Modal.getOrCreateInstance(modal);
+            instance.show();
+
+            modal.addEventListener('shown.bs.modal', () => {
+                modal.querySelector('input')?.focus();
+            }, { once: true });
         });
     });
 }

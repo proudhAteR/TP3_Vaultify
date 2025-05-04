@@ -9,7 +9,7 @@ class EncryptionService
 {
     public static function get_key() : ?string
     {
-        return Session::get("key");
+        return Session::get("key") ?? Cryptography::getEncryptionDefaultKey();
     }
 
     public static function generate_salt(): string

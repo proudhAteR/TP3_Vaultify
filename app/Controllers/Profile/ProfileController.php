@@ -13,6 +13,6 @@ class ProfileController extends AppController
     #[Get('/')]
     public function index(): Response
     {
-        return $this->display("profile", ["title" => "Profile"]);
+        return $this->display(page: "profile", args: ["title" => "Profile"]);
     }
 }

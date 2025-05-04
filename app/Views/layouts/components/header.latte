@@ -6,13 +6,16 @@
         <div class="header-title">
             <h1 class="m-0">{$title}</h1>
         </div>
-        <div class="d-flex nav_end gap-4 ">
-            <img class="d-flex justify-content-start rounded-5" src="/assets/images/users/{$profile_path}" alt="User avatar"
-                 width="40"
-                 height="40">
-            <form method="post" action="/disconnect" class="m-0">
-                <button type="submit" class="btn btn-outline-danger">Disconnect</button>
-            </form>
-        </div>
+
+
+        {if !is_profile($title)}
+            <div class="d-flex nav_end gap-4 align-items-center">
+               <a href="/profile">
+                   <img loading="lazy" class="profile_pic_min d-flex justify-content-start rounded-circle"
+                        alt="User avatar" src="/assets/images/users/{$profile_path}">
+               </a>
+                {include disconnect_button.latte, saying => 'Dsiconnect'}
+            </div>
+        {/if}
     </div>
 </nav>

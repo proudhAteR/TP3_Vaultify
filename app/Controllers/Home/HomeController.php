@@ -12,8 +12,8 @@ class HomeController extends AppController
     public function index(): Response
     {
         return $this->display(
-            "home",
-            [
+            page: "home",
+            args: [
                 "title" => "Home",
                 "username" => AccountService::get_user()?->username,
                 "vaults" => new VaultBroker()->find() ?? [],
