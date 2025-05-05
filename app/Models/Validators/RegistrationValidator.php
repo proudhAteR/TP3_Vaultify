@@ -2,6 +2,7 @@
 
 namespace Models\Validators;
 
+use Models\Core\Entity;
 use Models\Exceptions\FormException;
 use Models\Rules\CustomRule;
 use Zephyrus\Application\Form;
@@ -35,11 +36,16 @@ class RegistrationValidator extends BaseAccountValidator
 
     private static function compare_password(Form $form): void
     {
-        $same  = $form->getValue("confirm_password") === $form->getValue("password");
+        $same = $form->getValue("confirm_password") === $form->getValue("password");
 
         if (!$same) {
-            $form->addError('not good', 'The entered passwords do not match.');
+            $form->addError('confirm_password', 'The entered passwords do not match.');
             throw new FormException($form);
         }
+    }
+
+
+    public static function verify(Entity $submitted, Entity $stored, Form $form): void
+    {
     }
 }

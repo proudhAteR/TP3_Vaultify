@@ -5,12 +5,10 @@ namespace Models\Validators;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
 
-abstract class BaseAccountValidator implements ValidatorInterface
+abstract class BaseAccountValidator extends BaseValidator
 {
-    protected static string $required_message = "This field is required";
-    protected static string $invalid_pwd_message = "Your password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter and one number.";
     protected static string $credentials_error_message = "The username or password you entered may not be valid.";
-    protected static string $used_error_message = "The username or is already been used.";
+    protected static string $used_error_message = "The username you entered is already been used.";
 
     public static function assert(Form $form): void
     {

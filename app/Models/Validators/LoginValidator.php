@@ -2,11 +2,11 @@
 
 namespace Models\Validators;
 
+use Models\Core\Entity;
+use Models\Entities\Account;
 use Models\Exceptions\FormException;
 use Models\Rules\CustomRule;
 use Zephyrus\Application\Form;
-use Zephyrus\Application\Rule;
-use Zephyrus\Security\Cryptography;
 
 class LoginValidator extends BaseAccountValidator
 {
@@ -23,16 +23,17 @@ class LoginValidator extends BaseAccountValidator
         }
     }
 
-    public static function verify(string $submitted, string $stored, Form $form): void
+    public static function verify(Account|Entity $submitted, Account|Entity $stored, Form $form): void
     {
-        if (!self::verify_cred($submitted, $stored)) {
+        if (!self::is_valid(class: Account::class, v: $submitted) || !self::is_valid(class: Account::class, v: $stored)) {
+            return;
+        }
+
+        if (!self::verify_cred($submitted->password, $stored->password)) {
             $form->addError('', self::$credentials_error_message);
             throw new FormException($form);
         }
     }
 
-    private static function verify_cred(string $clear, string $hash): bool
-    {
-        return Cryptography::verifyHashedPassword($clear, $hash);
-    }
+
 }

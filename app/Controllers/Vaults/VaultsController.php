@@ -38,15 +38,8 @@ class VaultsController extends AppController
             $this->buildForm()
         );
 
-        return $this->display(
-            page: "vaults",
-            args: [
-                'title' => "Vaults",
-                'vaults' => [$this->get_updated_vault()],
-                'decrypt' => function (string $pwd): string {
-                    return EncryptionService::decrypt($pwd);
-                }
-            ]
+        return $this->redirectBack(
+            $this->request
         );
     }
 

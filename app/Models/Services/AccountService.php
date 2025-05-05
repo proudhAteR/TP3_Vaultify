@@ -26,8 +26,8 @@ class AccountService
         );
 
         LoginValidator::verify(
-            $submitted->password,
-            $account->password,
+            $submitted,
+            $account,
             $form
         );
 
