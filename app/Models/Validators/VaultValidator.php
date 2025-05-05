@@ -44,17 +44,15 @@ class VaultValidator extends BaseValidator
         }
 
         $fieldsToCheck = [
-            'name' => ['method' => 'compare', 'params' => [$submitted->name, $stored->name]],
-            'username' => ['method' => 'compare', 'params' => [$submitted->username, $stored->username]],
-            'password' => ['method' => 'compare', 'params' => [$submitted->password, EncryptionService::decrypt($stored->password)]]
+            'name' => ['params' => [$submitted->name, $stored->name]],
+            'username' => ['params' => [$submitted->username, $stored->username]],
+            'password' => ['params' => [$submitted->password, EncryptionService::decrypt($stored->password)]]
         ];
 
         $changes = false;
 
         foreach ($fieldsToCheck as $field => $check) {
-            $method = $check['method'];
-
-            $same = self::$method(... $check['params']);
+            $same = self::compare(... $check['params']);
 
             if (!$same) {
                 $changes = true;

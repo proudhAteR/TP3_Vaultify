@@ -19,19 +19,25 @@
 </head>
 <body class="d-grid bg-body-secondary" data-bs-theme="dark">
 
-{if can_display($title)}
+{if !authentication($title)}
     {include components/sidebar.latte}
 {/if}
 
 <div class="container-fluid fade-in px-5">
-    {include "zf-flash"}
+        {include "zf-flash"}
 
-    {if can_display($title)}
-        {include components/header.latte, profile_path => get_profile()}
+    {if !authentication($title)}
+            {include components/header.latte, profile_path => get_profile()}
     {/if}
 
     {block content}{/block}
 </div>
+
+{block modal}
+    {foreach get_vaults() as $vault}
+        {include components/modal.latte, vault => $vault}
+    {/foreach}
+{/block}
 
 </body>
 <script src="/javascripts/vendor/popper-2.11.6/popper.min.js"></script>

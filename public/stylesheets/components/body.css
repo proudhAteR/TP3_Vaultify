@@ -23,10 +23,3 @@ img, video, iframe {
 small{
     overflow-wrap: break-word;
 }
-
-.modal-backdrop {
-    z-index: -1;
-}
-.modal {
-    z-index: 1050 !important;
-}

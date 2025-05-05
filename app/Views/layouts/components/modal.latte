@@ -1,8 +1,7 @@
 {varType Vault $vault}
-{varType string $pwd}
 
 <div class="modal fade rounded-4" tabindex="-1" id="manage-{$vault->id}">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
             <form method="post" action="/vaults/{$vault->id}">
                 <div class="modal-header">
@@ -12,7 +11,8 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="{$vault->id}_name" class="form-label">Vault Name</label>
-                        <input type="text" class="form-control" id="{$vault->id}_name" name="name" value="{$vault->name}"
+                        <input type="text" class="form-control" id="{$vault->id}_name" name="name"
+                               value="{$vault->name}"
                                required>
                     </div>
                     <div class="mb-3">
@@ -23,7 +23,7 @@
                     <div class="mb-3">
                         <label for="{$vault->id}_password" class="form-label">Password</label>
                         <input type="text" class="form-control" id="{$vault->id}_password" name="password"
-                               value="{$pwd}" required>
+                               value="{$vault->password}" required>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -94,4 +94,10 @@ class AccountService
     {
         return Session::get("user");
     }
+
+    public static function disconnect(): void
+    {
+        Session::remove("user");
+        Session::remove("vaults");
+    }
 }
