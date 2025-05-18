@@ -1,16 +1,42 @@
 {layout layouts/main.latte}
 
-{var $cards = [
-['title' => 'Profile picture','template' => profile_picture.latte, 'width' => 4 ],
-['title' => 'Infos', 'body' => '3 passwords are weak.', 'width' => 8]
+{var $details = [
+['title' => 'Avatar','template' => 'profile/profile_picture.latte', 'width' => 4 ],
+['title' => 'Infos', 'template' => 'profile/infos.latte', 'width' => 8]
 ]}
 
+{var $actions = [
+    ['title' => 'MFA', 'template' => 'profile/multifactor_toggle.latte'],
+    ['title' => 'Settings', 'template' => 'actions.latte',
+        'args' => [
+            'actions' => [
+                ['icon' => 'fas fa-user-edit', 'color' => 'primary', 'label' => 'Change avatar', 'does' => 'profile/'],
+                ['icon' => 'fas fa-envelope', 'color' => 'info', 'label' => 'Update email', 'does' => 'profile/'],
+                ['icon' => 'fas fa-phone', 'color' => 'info', 'label' => 'Update phone number', 'does' => 'profile/'],
+                ['icon' => 'fas fa-key', 'color' => 'warning', 'label' => 'Change password', 'does' => 'profile/'],
+                ['icon' => 'fas fa-trash-alt', 'color' => 'danger', 'label' => 'Delete account', 'does' => 'profile/']
+            ]
+        ]
+    ]
+]}
 {block content}
-    <div class="content">
-        <div class="profile-infos row align-items-stretch">
-            {foreach $cards as $card}
+    <div class="content d-flex flex-column gap-5">
+        <div class="profile-details row align-items-stretch">
+            {foreach $details as $card}
                 {include layouts/components/card.latte, card => $card}
             {/foreach}
         </div>
+
+        <div class="profile-actions row align-items-stretch gap-3">
+            {foreach $actions as $card}
+                {include layouts/components/card.latte, card => $card}
+            {/foreach}
+        </div>
+    </div>
+
+    <div class="my-5 text-end">
+        <a href="/profile/save" class="btn btn-primary">
+            Save changes
+        </a>
     </div>
 {/block}

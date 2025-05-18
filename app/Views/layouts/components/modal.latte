@@ -1,8 +1,8 @@
-{varType Vault $vault}
+{varType Models\Entities\Vault $vault}
 
-<div class="modal fade rounded-4" tabindex="-1" id="manage-{$vault->id}">
+<div class="modal fade rounded" tabindex="-1" id="manage-{$vault->id}">
     <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content rounded-3">
             <form method="post" action="/vaults/{$vault->id}">
                 <div class="modal-header">
                     <h3 class="modal-title">Manage Vault</h3>

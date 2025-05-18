@@ -3,36 +3,13 @@
 {block content}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pt-2">
         {foreach $vaults as $vault}
+            {var array $card = [
+            'title' => $vault->name,
+            'template' => 'vault.latte',
+            'args' => ['vault' => $vault]
+            ]}
             <div class="col">
-                <div class="card rounded-3 h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            <h4 class="card-title mb-2">{$vault->name}</h4>
-                            <div class="mb-2">
-                                <small class="text-muted">Username</small>
-                                <div class="fw-semibold">{$vault->username}</div>
-                            </div>
-                            <div class="mb-2">
-                                <small class="text-muted text-break">Password</small>
-                                <div class="d-flex align-items-center justify-content-between gap-2">
-                                   <span class="text-break d-inline-block w-100"
-                                         data-password="{$vault->password}">
-                                        {str_repeat('•', 8)}
-                                   </span>
-                                    <button data-show type="button" class="btn btn-sm btn-outline-secondary">
-                                        Show
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 d-flex justify-content-between align-items-center">
-                            <button data-manage class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#manage-{$vault->id}">Manage
-                            </button>
-                            <small class="text-muted">Updated on {date('F j, Y', strtotime($vault->date))}</small>
-                        </div>
-                    </div>
-                </div>
+                {include 'layouts/components/card.latte', card => $card}
             </div>
         {/foreach}
     </div>

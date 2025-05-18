@@ -31,3 +31,7 @@ img.profile_pic_max {
     height: 200px;
     border-radius: 50%;
 }
+
+.btn{
+    border-radius: var(--bs-border-radius-lg) !important;
+}

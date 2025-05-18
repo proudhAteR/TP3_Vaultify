@@ -19,17 +19,13 @@
 </head>
 <body class="d-grid bg-body-secondary" data-bs-theme="dark">
 
-{if !authentication($title)}
-    {include components/sidebar.latte}
-{/if}
+{if !authentication_view($title)}{include components/sidebar.latte}{/if}
 
 
 <div class="container-fluid fade-in px-5">
         {include "zf-flash"}
 
-    {if !authentication($title)}
-            {include components/header.latte}
-        {/if}
+    {if !authentication_view($title)}{include components/header.latte}{/if}
 
     {block content}{/block}
 </div>

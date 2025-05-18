@@ -1,15 +1,14 @@
-{varType string $title}
 {varType array $actions}
 
-<div class="card h-100">
-    <div class="card-header fw-bold">{$title}</div>
-    <ul class="list-group list-group-flush">
-        {foreach $actions as $action}
-            <li class="list-group-item d-flex align-items-center">
-                <button class="btn btn-link p-0 text-decoration-none d-flex align-items-center">
-                    <i class="{$action['icon']} me-2 {$action['color']}"></i> {$action['label']}
+<ul class="list-group list-group-flush">
+    {foreach $actions as $action}
+        <li class="list-group-item px-0">
+            <form action="/{$action['does'] ?? ''}" class="m-0 p-0">
+                <button type="submit"
+                        class="w-100 border-0 bg-transparent text-start d-flex align-items-center py-2 px-0">
+                    <i class="{$action['icon']} me-2 text-{$action['color'] ?? 'primary'}"></i> {$action['label']}
                 </button>
-            </li>
-        {/foreach}
-    </ul>
-</div>
+            </form>
+        </li>
+    {/foreach}
+</ul>

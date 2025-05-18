@@ -1,0 +1,17 @@
+{var $infos = get_infos()}
+{var $fields = [
+'username' => 'Username',
+'mail' => 'Mail',
+'phone' => 'Phone'
+]}
+
+<div class="d-flex profile-infos flex-column gap-2">
+    {foreach $fields as $key => $label}
+        <div id="{$key}" class="pt-3">
+            <h6 class="sec-title text-secondary bold">{$label}</h6>
+            <div class="sec-body">
+                {$infos[$key] ?? 'N/A'}
+            </div>
+        </div>
+    {/foreach}
+</div>
