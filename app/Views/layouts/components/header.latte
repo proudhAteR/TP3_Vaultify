@@ -1,5 +1,4 @@
 {varType string $title}
-{varType string $profile_path}
 
 <nav class="navbar bg-body-secondary border-bottom border-1 my-4">
     <div class="d-flex container-fluid align-items-center justify-content-between p-0">
@@ -12,7 +11,7 @@
             <div class="d-flex nav_end gap-4 align-items-center">
                <a href="/profile">
                    <img loading="lazy" class="profile_pic_min d-flex justify-content-start rounded-circle"
-                        alt="User avatar" src="/assets/images/users/{$profile_path}">
+                        alt="User avatar" src="/assets/images/users/{get_profile()}">
                </a>
                 {include disconnect_button.latte, saying => 'Dsiconnect'}
             </div>

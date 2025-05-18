@@ -23,12 +23,13 @@
     {include components/sidebar.latte}
 {/if}
 
+
 <div class="container-fluid fade-in px-5">
         {include "zf-flash"}
 
     {if !authentication($title)}
-            {include components/header.latte, profile_path => get_profile()}
-    {/if}
+            {include components/header.latte}
+        {/if}
 
     {block content}{/block}
 </div>

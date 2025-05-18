@@ -1,7 +1,16 @@
 {layout layouts/main.latte}
 
+{var $cards = [
+['title' => 'Profile picture','template' => profile_picture.latte, 'width' => 4 ],
+['title' => 'Infos', 'body' => '3 passwords are weak.', 'width' => 8]
+]}
+
 {block content}
     <div class="content">
-        <p>{localize("strings.welcome")}</p>
+        <div class="profile-infos row align-items-stretch">
+            {foreach $cards as $card}
+                {include layouts/components/card.latte, card => $card}
+            {/foreach}
+        </div>
     </div>
 {/block}

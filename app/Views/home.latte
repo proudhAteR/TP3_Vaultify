@@ -23,21 +23,15 @@
         </div>
 
         <div class="row align-items-stretch">
+            {var $width = floor(12 / count($cards))}
             {foreach $cards as $card}
-                {include layouts/components/card.latte,
-                card_title => $card['title'],
-                card_body => $card['body'],
-                color => $card['color'],
-                s => 12/count($cards),
-                }
+                {include layouts/components/card.latte, card => array_merge($card, ['width' => $width])}
             {/foreach}
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                {include layouts/components/actions.latte,
-                title => 'Quick Actions',
-                actions => $actions}
+                {include layouts/components/actions.latte,title => 'Quick Actions',actions => $actions}
             </div>
         </div>
     </div>
