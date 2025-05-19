@@ -15,8 +15,7 @@ class MfaService
         $mfa = self::build_Mfa(
             $form->buildObject()
         );
-
-        $mfa->enabled = filter_var($mfa->enabled ?? false, FILTER_VALIDATE_BOOLEAN);
+        self::sanitize($mfa);
 
         new MfaBroker()->update($mfa, AccountService::get_user()->id);
         Flash::success("MFA updated successfully");
@@ -34,5 +33,10 @@ class MfaService
         );
 
         return $mfa->enabled;
+    }
+
+    private static function sanitize(Mfa $mfa) : void
+    {
+        $mfa->enabled = filter_var($mfa->enabled ?? false, FILTER_VALIDATE_BOOLEAN);
     }
 }
