@@ -3,6 +3,7 @@
 namespace Models\Brokers;
 
 use Models\Entities\Account;
+use Models\Services\AccountService;
 use Models\Services\EncryptionService;
 use stdClass;
 use Zephyrus\Database\DatabaseBroker;
@@ -42,5 +43,9 @@ class AccountBroker extends DatabaseBroker
         ]);
     }
 
+    public function update_avatar(string $new, int $id): void
+    {
+        $this->query("UPDATE account SET avatar = ? WHERE id = ?", [$new, $id]);
+    }
 
 }

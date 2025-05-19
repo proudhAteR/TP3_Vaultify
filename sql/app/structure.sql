@@ -5,7 +5,7 @@ CREATE TABLE account
     mail     TEXT NOT NULL,
     salt     TEXT NOT NULL,
     password TEXT NOT NULL,
-    profile  TEXT NOT NULL DEFAULT 'placeholder.jpg'
+    avatar  TEXT NOT NULL DEFAULT 'placeholder.jpg'
 );
 
 CREATE TABLE vault

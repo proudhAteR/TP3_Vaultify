@@ -10,9 +10,9 @@ function authentication_view(string $title): bool
         || strcasecmp($title, 'Register') === 0;
 }
 
-function get_profile(): string
+function get_avatar(): string
 {
-    return AccountService::get_user()->profile;
+    return AccountService::get_user()->avatar;
 }
 
 function is_profile(string $page): bool

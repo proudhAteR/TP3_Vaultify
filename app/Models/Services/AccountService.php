@@ -7,6 +7,7 @@ use Models\Entities\Account;
 use Models\Validators\LoginValidator;
 use Models\Validators\RegistrationValidator;
 use stdClass;
+use Zephyrus\Application\Flash;
 use Zephyrus\Application\Form;
 use Zephyrus\Core\Session;
 
@@ -100,4 +101,43 @@ class AccountService
         Session::remove("user");
         Session::remove("vaults");
     }
+
+    public static function update_avatar($avatar): void
+    {
+        if (!self::is_valid_avatar($avatar)) {
+            Flash::error("Unable to upload avatar");
+            return;
+        }
+
+        $filename = self::generate_filename($avatar['name']);
+        $upload_path = self::get_upload_path();
+
+
+        $dest = $upload_path . "/" . $filename;
+
+        if (!move_uploaded_file($avatar['tmp_name'], $dest)) {
+            Flash::error("Failed to move uploaded file.");
+            return;
+        }
+
+        new AccountBroker()->update_avatar($filename, self::get_user()->id);
+        Flash::success("Your avatar has been updated with success!");
+    }
+
+    private static function is_valid_avatar($avatar): bool
+    {
+        return $avatar && $avatar['error'] === UPLOAD_ERR_OK;
+    }
+
+    private static function generate_filename(string $originalName): string
+    {
+        $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+        return uniqid('avatar_', true) . "." . $extension;
+    }
+
+    private static function get_upload_path(): string
+    {
+        return $_SERVER['DOCUMENT_ROOT'] . "/assets/images/users";
+    }
+
 }

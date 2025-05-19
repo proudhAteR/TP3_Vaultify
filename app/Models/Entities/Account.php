@@ -11,5 +11,5 @@ class Account extends Entity
     public string $password;
     public string $mail;
     public string $salt;
-    public string $profile;
+    public string $avatar;
 }

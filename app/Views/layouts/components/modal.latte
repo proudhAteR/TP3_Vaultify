@@ -6,7 +6,7 @@
 <div class="modal fade rounded" tabindex="-1" id="{$modal}">
     <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content rounded-3">
-            <form method="post" action="{$action}">
+            <form method="post" action="{$action}" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h3 class="modal-title">{$title}</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -16,12 +16,15 @@
                         <div class="mb-3">
                             <label for="{$field['id']}" class="form-label">{$field['label']}</label>
                             <input
-                                type="{$field['type'] ?? 'text'}"
-                                class="form-control"
-                                id="{$field['id']}"
-                                name="{$field['name']}"
-                                value="{$field['value'] ?? ''}"
-                                {if $field['required'] ?? true}required{/if}>
+                                    type="{$field['type'] ?? 'text'}"
+                                    class="form-control"
+                                    id="{$field['id']}"
+                                    name="{$field['name']}"
+                                    value="{$field['value'] ?? ''}"
+                                    {if $field['required'] ?? true}required{/if}
+                                    {if isset($field['type']) && $field['type'] == 'file'}
+                                         accept="image/jpeg,image/png,image/gif,image/webp"
+                                    {/if}>
                         </div>
                     {/foreach}
                 </div>

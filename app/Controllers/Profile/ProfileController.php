@@ -3,6 +3,7 @@
 namespace Controllers\Profile;
 
 use Controllers\AppController;
+use Models\Services\AccountService;
 use Zephyrus\Network\Response;
 use Zephyrus\Network\Router\Get;
 use Zephyrus\Network\Router\Post;
@@ -20,7 +21,9 @@ class ProfileController extends AppController
     #[Post('/upload-avatar')]
     public function uploadAvatar(): Response
     {
-        $avatar = $this->request->getBody()->getParameter("avatar");
-        return $this->abortNotImplemented();
+        $avatar = $this->request->getFiles()['avatar'];
+        AccountService::update_avatar($avatar);
+
+        return $this->display(page: "profile", args: ["title" => "Profile"]);
     }
 }
