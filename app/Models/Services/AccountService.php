@@ -120,7 +120,9 @@ class AccountService
             return;
         }
 
+        self::delete_old_avatar($upload_path);
         new AccountBroker()->update_avatar($filename, self::get_user()->id);
+
         Flash::success("Your avatar has been updated with success!");
     }
 
@@ -138,6 +140,15 @@ class AccountService
     private static function get_upload_path(): string
     {
         return $_SERVER['DOCUMENT_ROOT'] . "/assets/images/users";
+    }
+
+    private static function delete_old_avatar(string $upload_path): void
+    {
+        $avatar = $upload_path . "/" . self::get_user()->avatar;
+
+        if (file_exists($avatar)) {
+            unlink($avatar);
+        }
     }
 
 }
