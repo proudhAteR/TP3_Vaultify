@@ -1,14 +1,22 @@
 {varType array $actions}
 
-<ul class="list-group list-group-flush">
+<ul class="list-group list-group-flush actions">
     {foreach $actions as $action}
-        <li class="list-group-item px-0">
-            <form action="/{$action['does'] ?? ''}" class="m-0 p-0">
-                <button type="submit"
+        <li class="list-group-item border-0 shadow-none rounded-3 bg-body-secondary mb-3">
+            {ifset $action['does']}
+                <form action="/{$action['does']}" class="m-0 p-0">
+                    <button type="submit"
+                            class="w-100 border-0 bg-transparent text-start d-flex align-items-center py-2 px-0">
+                        <i class="fas fa-{$action['icon']} me-2 text-{$action['color'] ?? 'primary'}"></i> {$action['label']}
+                    </button>
+                </form>
+
+            {else}
+                <button data-actions type="submit" data-bs-toggle="modal" data-bs-target="{$action['target'] ?? ''}"
                         class="w-100 border-0 bg-transparent text-start d-flex align-items-center py-2 px-0">
-                    <i class="{$action['icon']} me-2 text-{$action['color'] ?? 'primary'}"></i> {$action['label']}
+                    <i class="fas fa-{$action['icon']} me-2 text-{$action['color'] ?? 'primary'}"></i> {$action['label']}
                 </button>
-            </form>
+            {/ifset}
         </li>
     {/foreach}
 </ul>

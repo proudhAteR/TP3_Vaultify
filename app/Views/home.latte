@@ -4,9 +4,9 @@
 {varType array $vaults}
 
 {var $infos = [
-['title' => 'Vaults Overview', 'body' => 'You have ' . count($vaults) . ' stored vault(s).', 'color' => 'primary'],
-['title' => 'Security Alert', 'body' => '3 passwords are weak.', 'color' => 'danger'],
-['title' => 'New Feature', 'body' => 'Vaultify now supports MFA.', 'color' => 'success']
+    ['title' => 'Vaults Overview', 'body' => 'You have ' . count($vaults) . ' stored vault(s).', 'color' => 'primary'],
+    ['title' => 'Security Alert', 'body' => '3 passwords are weak.', 'color' => 'danger'],
+    ['title' => 'New Feature', 'body' => 'Vaultify now supports MFA.', 'color' => 'success']
 ]}
 
 
@@ -14,9 +14,9 @@
     'title' => 'Quick Actions',
     'template' => 'actions.latte','args' => [
         'actions' => [
-            ['icon' => 'fas fa-plus-circle', 'color' => 'success', 'label' => 'Create a vault'],
-            ['icon' => 'fas fa-sync-alt', 'color' => 'primary', 'label' => 'Generate Vault'],
-            ['icon' => 'fas fa-share-alt', 'color' => 'info', 'label' => 'Share vault'],
+            ['icon' => 'plus-circle', 'color' => 'success', 'label' => 'Create a vault'],
+            ['icon' => 'sync-alt', 'color' => 'primary', 'label' => 'Generate Vault'],
+            ['icon' => 'share-alt', 'color' => 'info', 'label' => 'Share vault'],
         ]
     ]
 ]}

@@ -10,11 +10,10 @@
     ['title' => 'Settings', 'template' => 'actions.latte',
         'args' => [
             'actions' => [
-                ['icon' => 'fas fa-user-edit', 'color' => 'primary', 'label' => 'Change avatar', 'does' => 'profile/'],
-                ['icon' => 'fas fa-envelope', 'color' => 'info', 'label' => 'Update email', 'does' => 'profile/'],
-                ['icon' => 'fas fa-phone', 'color' => 'info', 'label' => 'Update phone number', 'does' => 'profile/'],
-                ['icon' => 'fas fa-key', 'color' => 'warning', 'label' => 'Change password', 'does' => 'profile/'],
-                ['icon' => 'fas fa-trash-alt', 'color' => 'danger', 'label' => 'Delete account', 'does' => 'profile/']
+                ['icon' => 'user-edit', 'color' => 'primary', 'label' => 'Change avatar', 'target' => '#edit-profile-picture'],
+                ['icon' => 'phone', 'color' => 'info', 'label' => 'Update phone number', 'does' => 'profile/'],
+                ['icon' => 'key', 'color' => 'warning', 'label' => 'Change password', 'does' => 'profile/'],
+                ['icon' => 'trash-alt', 'color' => 'danger', 'label' => 'Delete account', 'does' => 'profile/']
             ]
         ]
     ]
@@ -35,7 +34,7 @@
     </div>
 
     <div class="my-5 text-end">
-        <a href="/profile/save" class="btn btn-primary">
+        <a href="/profile/save" class="btn btn-primary disabled">
             Save changes
         </a>
     </div>

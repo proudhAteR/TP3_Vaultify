@@ -32,6 +32,14 @@ img.profile_pic_max {
     border-radius: 50%;
 }
 
-.btn{
+.btn {
     border-radius: var(--bs-border-radius-lg) !important;
+}
+
+.actions {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    & li:hover {
+        animation: hoverLift 0.25s ease forwards;
+    }
 }

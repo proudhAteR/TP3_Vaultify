@@ -1,6 +1,6 @@
 import listen from './navbar.js'
 import Application from './app.js';
-import {togglePassword, focusOnManage} from "./vault.js";
+import {togglePassword, focusOnModal} from "./vault.js";
 
 activateListeners();
 new Application().initialize();
