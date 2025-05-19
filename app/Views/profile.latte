@@ -1,12 +1,16 @@
 {layout layouts/main.latte}
 
+{varType bool $enabled}
+
 {var $details = [
 ['title' => 'Avatar','template' => 'profile/profile_picture.latte', 'width' => 4 ],
 ['title' => 'Infos', 'template' => 'profile/infos.latte', 'width' => 8]
 ]}
 
 {var $actions = [
-    ['title' => 'MFA', 'template' => 'profile/multifactor_toggle.latte'],
+    ['title' => 'MFA', 'template' => 'profile/multifactor_toggle.latte',
+        'args'=> ['enabled' => $enabled]
+    ],
     ['title' => 'Settings', 'template' => 'actions.latte',
         'args' => [
             'actions' => [
@@ -31,5 +35,11 @@
                 {include layouts/components/card.latte, card => $card}
             {/foreach}
         </div>
+    </div>
+
+    <div  class="my-4 text-end">
+        <button data-save form="mfa_form" class="btn btn-primary" type="submit">
+            Save changes
+        </button>
     </div>
 {/block}

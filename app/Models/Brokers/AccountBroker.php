@@ -18,7 +18,6 @@ class AccountBroker extends DatabaseBroker
 
     public function findByName(string $username): ?stdClass
     {
-
         return $this->selectSingle("SELECT * FROM account WHERE username = ?", [$username]);
     }
 
@@ -41,6 +40,8 @@ class AccountBroker extends DatabaseBroker
                 $account->password
             )
         ]);
+
+        $this->query("INSERT INTO mfa (account_id) VALUES (?)", [$account->id]);
     }
 
     public function update_avatar(string $new, int $id): void

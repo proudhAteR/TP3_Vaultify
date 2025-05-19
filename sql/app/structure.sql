@@ -5,7 +5,10 @@ CREATE TABLE account
     mail     TEXT NOT NULL,
     salt     TEXT NOT NULL,
     password TEXT NOT NULL,
-    avatar  TEXT NOT NULL DEFAULT 'placeholder.jpg'
+    avatar   TEXT NOT NULL DEFAULT 'placeholder.jpg',
+
+    CONSTRAINT unique_mail UNIQUE (mail),
+    CONSTRAINT unique_username UNIQUE (username)
 );
 
 CREATE TABLE vault
@@ -20,13 +23,10 @@ CREATE TABLE vault
     FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE
 );
 
-CREATE TYPE mfa_type AS ENUM ('phone', 'mail');
 CREATE TABLE mfa
 (
-    id         INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    account_id INT      NOT NULL,
-    type       mfa_type NOT NULL,
-    value      TEXT     NOT NULL,
+    account_id INT  NOT NULL PRIMARY KEY,
+    enabled    BOOL NOT NULL DEFAULT FALSE,
 
     FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE
 );
