@@ -1,0 +1,1 @@
+INSERT INTO mfa(account_id) VALUES (1)

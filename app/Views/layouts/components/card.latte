@@ -3,7 +3,7 @@
 <div class="col-md-{$card['width'] ?? 12}">
     <div class="card rounded-3 text-bg-{$card['color'] ?? 'body-secondary'} h-100">
         <div class="card-body">
-            <h5 class="card-title">{$card['title']}</h5>
+            <h4 class="card-title">{$card['title']}</h4>
             <div class="card-text fs-6">
                 {ifset $card['template']}
                     {include $card['template'], ...$card['args'] ?? []}

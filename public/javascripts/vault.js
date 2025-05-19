@@ -19,22 +19,3 @@ export function togglePassword() {
         });
     });
 }
-
-export function focusOnModal() {
-    document.querySelectorAll('[data-trigger]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const modalSelector = btn.getAttribute('data-bs-target');
-            const modal = document.querySelector(modalSelector);
-
-            if (!modal) return;
-            modal.removeAttribute('aria-hidden');
-
-            const instance = bootstrap.Modal.getOrCreateInstance(modal);
-            instance.show();
-
-            modal.addEventListener('shown.bs.modal', () => {
-                modal.querySelector('input')?.focus();
-            }, {once: true});
-        });
-    });
-}
