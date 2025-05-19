@@ -4,8 +4,10 @@ namespace Models\Services;
 
 use Models\Brokers\AccountBroker;
 use Models\Entities\Account;
-use Models\Validators\LoginValidator;
-use Models\Validators\RegistrationValidator;
+use Models\Validators\Authentication\LoginValidator;
+use Models\Validators\Authentication\RegistrationValidator;
+use Models\Validators\Modification\PasswordModification;
+use Models\Validators\Modification\UsernameModification;
 use stdClass;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Form;
@@ -149,6 +151,32 @@ class AccountService
         if (file_exists($avatar)) {
             unlink($avatar);
         }
+    }
+
+    public static function update_username(Form $form): void
+    {
+        UsernameModification::assert($form);
+
+        $account = self::build_account(
+            $form->buildObject()
+        );
+
+        new AccountBroker()->update_username($account);
+        Flash::success("Your username has been updated with success.");
+    }
+
+    public static function update_password(Form $form): void
+    {
+        PasswordModification::assert($form);
+
+        $account = self::build_account(
+            $form->buildObject()
+        );
+
+        PasswordModification::verify($account, self::get_user(), $form);
+
+        new AccountBroker()->update_password($account);
+        Flash::success("Your password has been updated with success.");
     }
 
 }

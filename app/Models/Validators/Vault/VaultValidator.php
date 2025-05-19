@@ -1,12 +1,12 @@
 <?php
 
-namespace Models\Validators;
+namespace Models\Validators\Vault;
 
 use Models\Core\Entity;
-use Models\Entities\Account;
 use Models\Entities\Vault;
 use Models\Exceptions\FormException;
 use Models\Services\EncryptionService;
+use Models\Validators\BaseValidator;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
 

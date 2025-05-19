@@ -18,7 +18,7 @@ class MfaService
         self::sanitize($mfa);
 
         new MfaBroker()->update($mfa, AccountService::get_user()->id);
-        Flash::success("MFA updated successfully");
+        Flash::success("MFA updated successfully.");
     }
 
     public static function build_Mfa(stdClass $obj): Mfa

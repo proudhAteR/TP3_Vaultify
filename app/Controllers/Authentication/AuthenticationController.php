@@ -13,9 +13,7 @@ class AuthenticationController extends AppController
 {
     protected function display(string $page, array $args, string $url = "/login"): Response
     {
-        return !$this->isAuth() ?
-            $this->render($page, $args) :
-            $this->redirectBack($this->request);
+        return !$this->isAuth() ? $this->render($page, $args) : $this->go_back();
     }
 
     protected function connect(Account $acc, Form $form): Response

@@ -34,9 +34,9 @@
     {include components/modal.latte,
     modal => 'edit-username',
     title => 'Change Username',
-    action => '/profile/update-username',
+    action => '/profile/update_username',
     fields => [
-        ['id' => 'username', 'name' => 'username', 'label' => 'New Username', 'value' => '']
+        ['id' => 'username', 'name' => 'username', 'label' => 'New Username']
     ]}
 
     {include components/modal.latte,
@@ -55,6 +55,16 @@
     action => '/profile/upload-avatar',
     fields => [
         ['id' => 'avatar', 'name' => 'avatar', 'label' => 'Choose a picture', 'type' => 'file', 'required' => true]
+    ]}
+
+    {include components/modal.latte,
+    modal => 'edit-password',
+    title => 'Change Password',
+    action => '/profile/update_password',
+    fields => [
+        ['id' => 'current_password', 'name' => 'password', 'label' => 'Current Password', 'type' => 'password', 'required' => true],
+        ['id' => 'new_password', 'name' => 'new_password', 'label' => 'New Password', 'type' => 'password', 'required' => true],
+        ['id' => 'confirm_password', 'name' => 'confirm_password', 'label' => 'Confirm New Password', 'type' => 'password', 'required' => true]
     ]}
 
     {foreach get_vaults() as $vault}
