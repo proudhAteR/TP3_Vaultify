@@ -17,3 +17,29 @@
 i {
     margin-right: 10px;
 }
+
+img.profile_pic_min {
+    object-fit: cover;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+}
+
+img.profile_pic_max {
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.btn {
+    border-radius: var(--bs-border-radius-lg) !important;
+}
+
+.actions {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    & li:hover {
+        animation: hoverLift 0.25s ease forwards;
+    }
+}

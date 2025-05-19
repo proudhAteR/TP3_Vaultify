@@ -1,13 +1,16 @@
-{varType string $card_title}
-{varType string $card_body}
-{varType string $color}
-{varType string $s}
+{varType array $card}
 
-<div class="col-md-{$s}">
-    <div class="card text-bg-{$color} h-100">
+<div class="col-md-{$card['width'] ?? 12}">
+    <div class="card rounded-3 text-bg-{$card['color'] ?? 'body-secondary'} h-100">
         <div class="card-body">
-            <h5 class="card-title">{$card_title}</h5>
-            <p class="card-text fs-6">{$card_body}</p>
+            <h5 class="card-title">{$card['title']}</h5>
+            <div class="card-text fs-6">
+                {ifset $card['template']}
+                    {include $card['template'], ...$card['args'] ?? []}
+                {else}
+                    {$card['body']}
+                {/ifset}
+            </div>
         </div>
     </div>
 </div>

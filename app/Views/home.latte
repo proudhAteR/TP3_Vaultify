@@ -3,41 +3,41 @@
 {varType string $username}
 {varType array $vaults}
 
-{var $cards = [
-['title' => 'Vaults Overview', 'body' => 'You have ' . count($vaults) . ' stored vault(s).', 'color' => 'primary'],
-['title' => 'Security Alert', 'body' => '3 passwords are weak.', 'color' => 'danger'],
-['title' => 'New Feature', 'body' => 'Vaultify now supports MFA.', 'color' => 'success']
+{var $infos = [
+    ['title' => 'Vaults Overview', 'body' => 'You have ' . count($vaults) . ' stored vault(s).', 'color' => 'primary'],
+    ['title' => 'Security Alert', 'body' => '3 passwords are weak.', 'color' => 'danger'],
+    ['title' => 'New Feature', 'body' => 'Vaultify now supports MFA.', 'color' => 'success']
 ]}
 
+
 {var $actions = [
-['icon' => 'fas fa-plus-circle', 'color' => 'text-success', 'label' => 'Add new password'],
-['icon' => 'fas fa-sync-alt', 'color' => 'text-primary', 'label' => 'Generate Password'],
-['icon' => 'fas fa-shield-alt', 'color' => 'text-warning', 'label' => 'Share vault'],
+    'title' => 'Quick Actions',
+    'template' => 'actions.latte','args' => [
+        'actions' => [
+            ['icon' => 'plus-circle', 'color' => 'success', 'label' => 'Create a vault'],
+            ['icon' => 'sync-alt', 'color' => 'primary', 'label' => 'Generate Vault'],
+            ['icon' => 'share-alt', 'color' => 'info', 'label' => 'Share vault'],
+        ]
+    ]
 ]}
 
 {block content}
-    <div class="content gap-4 d-flex flex-column">
-        <div>
+    <div class="content gap-5 d-flex flex-column">
+        <div class="mt-3">
             <h2>Welcome back, {$username}</h2>
             <p class="text-muted">Here’s what’s happening in your vaults today.</p>
         </div>
 
         <div class="row align-items-stretch">
-            {foreach $cards as $card}
-                {include layouts/components/card.latte,
-                card_title => $card['title'],
-                card_body => $card['body'],
-                color => $card['color'],
-                s => 12/count($cards),
-                }
+            {var $width = floor(12 / count($infos))}
+            {foreach $infos as $card}
+                {include layouts/components/card.latte, card => array_merge($card, ['width' => $width])}
             {/foreach}
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                {include layouts/components/actions.latte,
-                title => 'Quick Actions',
-                actions => $actions}
+                {include layouts/components/card.latte, card => $actions}
             </div>
         </div>
     </div>

@@ -1,7 +1,35 @@
 {layout layouts/main.latte}
 
+{var $details = [
+['title' => 'Avatar','template' => 'profile/profile_picture.latte', 'width' => 4 ],
+['title' => 'Infos', 'template' => 'profile/infos.latte', 'width' => 8]
+]}
+
+{var $actions = [
+    ['title' => 'MFA', 'template' => 'profile/multifactor_toggle.latte'],
+    ['title' => 'Settings', 'template' => 'actions.latte',
+        'args' => [
+            'actions' => [
+                ['icon' => 'user-edit', 'color' => 'primary', 'label' => 'Change avatar', 'target' => '#edit-profile-picture'],
+                ['icon' => 'phone', 'color' => 'info', 'label' => 'Update phone number', 'does' => 'profile/'],
+                ['icon' => 'key', 'color' => 'warning', 'label' => 'Change password', 'does' => 'profile/'],
+                ['icon' => 'trash-alt', 'color' => 'danger', 'label' => 'Delete account', 'does' => 'profile/']
+            ]
+        ]
+    ]
+]}
 {block content}
-    <div class="content">
-        <p>{localize("strings.welcome")}</p>
+    <div class="content d-flex flex-column gap-5">
+        <div class="profile-details row align-items-stretch">
+            {foreach $details as $card}
+                {include layouts/components/card.latte, card => $card}
+            {/foreach}
+        </div>
+
+        <div class="profile-actions row align-items-stretch gap-3">
+            {foreach $actions as $card}
+                {include layouts/components/card.latte, card => $card}
+            {/foreach}
+        </div>
     </div>
 {/block}
