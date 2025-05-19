@@ -16,16 +16,19 @@
 
     {if !empty($vaults)}
         <div class="mt-5 text-end">
-            <a href="/vaults/create" class="btn btn-success">
+            <button class="btn btn-success" data-bs-target="#create-vault" data-bs-toggle="modal" data-trigger>
                 <i class="bi bi-plus-lg"></i>Add Vault
-            </a>
+            </button>
+
         </div>
     {/if}
 
     {if empty($vaults)}
         <div class="text-center text-muted mt-5">
             <p>You don't have any vaults yet.</p>
-            <a href="/vaults/create" class="btn btn-primary mt-2">Create your first Vault</a>
+            <button class="btn btn-success" data-bs-target="#create-vault" data-bs-toggle="modal" data-trigger>
+                Create your first Vault
+            </button>
         </div>
     {/if}
 {/block}

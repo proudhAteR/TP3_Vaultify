@@ -36,7 +36,17 @@
     title => 'Change Username',
     action => '/profile/update-username',
     fields => [
-        ['id' => 'username', 'name' => 'username', 'label' => 'New Username', 'value' => '']
+    ['id' => 'username', 'name' => 'username', 'label' => 'New Username', 'value' => '']
+    ]}
+
+    {include components/modal.latte,
+    modal => 'create-vault',
+    title => 'Create a new vault',
+    action => '/vaults/create',
+    fields => [
+    ['id' => 'new_name', 'name' => 'name', 'label' => 'Name'],
+    ['id' => 'new_username', 'name' => 'username', 'label' => 'Username'],
+    ['id' => 'new_password', 'name' => 'password', 'label' => 'Password'],
     ]}
 
     {include components/modal.latte,
@@ -44,7 +54,7 @@
     title => 'Update Profile Picture',
     action => '/profile/upload-avatar',
     fields => [
-        ['id' => 'avatar', 'name' => 'avatar', 'label' => 'Choose a picture', 'type' => 'file', 'required' => true]
+    ['id' => 'avatar', 'name' => 'avatar', 'label' => 'Choose a picture', 'type' => 'file', 'required' => true]
     ]}
 
     {foreach get_vaults() as $vault}
@@ -53,13 +63,12 @@
         title => 'Edit Vault',
         action => "/vaults/" . $vault->id,
         fields => [
-            ['id' => $vault->id . "_name", 'name' => 'name', 'label' => 'Vault Name', 'value' => $vault->name],
-            ['id' => $vault->id . "_username", 'name' => 'username', 'label' => 'Username', 'value' => $vault->username],
-            ['id' => $vault->id . "_password", 'name' => 'password', 'label' => 'Password', 'value' => $vault->password]
+        ['id' => $vault->id . "_name", 'name' => 'name', 'label' => 'Vault Name', 'value' => $vault->name],
+        ['id' => $vault->id . "_username", 'name' => 'username', 'label' => 'Username', 'value' => $vault->username],
+        ['id' => $vault->id . "_password", 'name' => 'password', 'label' => 'Password', 'value' => $vault->password]
         ]}
     {/foreach}
 {/block}
-
 </body>
 <script src="/javascripts/vendor/popper-2.11.6/popper.min.js"></script>
 <script src="/javascripts/vendor/bootstrap-5.3.3/bootstrap.min.js"></script>

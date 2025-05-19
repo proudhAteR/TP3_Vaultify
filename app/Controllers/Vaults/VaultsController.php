@@ -23,6 +23,18 @@ class VaultsController extends AppController
         );
     }
 
+    #[Post('/create')]
+    public function create(): Response
+    {
+        VaultService::create(
+            $this->buildForm()
+        );
+
+        return $this->redirectBack(
+            $this->request
+        );
+    }
+
     #[Post('/{vault_id}')]
     public function update(): Response
     {

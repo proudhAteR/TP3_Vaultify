@@ -21,7 +21,7 @@ export function togglePassword() {
 }
 
 export function focusOnModal() {
-    document.querySelectorAll('[data-manage], [data-actions]').forEach(btn => {
+    document.querySelectorAll('[data-trigger]').forEach(btn => {
         btn.addEventListener('click', () => {
             const modalSelector = btn.getAttribute('data-bs-target');
             const modal = document.querySelector(modalSelector);
@@ -35,8 +35,6 @@ export function focusOnModal() {
             modal.addEventListener('shown.bs.modal', () => {
                 modal.querySelector('input')?.focus();
             }, {once: true});
-
-            console.log('test')
         });
     });
 }

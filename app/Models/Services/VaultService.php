@@ -17,6 +17,22 @@ class VaultService
         return Vault::build($vault);
     }
 
+    public static function create(Form $form): void
+    {
+        VaultValidator::assert($form);
+
+        $vault = self::build_vault(
+            $form->buildObject()
+        );
+
+        new VaultBroker()->create($vault);
+        self::find();
+
+        Flash::success(
+            sprintf("%s has been created with success!", $vault->name)
+        );
+    }
+
     public static function update(Vault $vault, Form $form): void
     {
         VaultValidator::assert($form);

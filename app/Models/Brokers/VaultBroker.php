@@ -16,7 +16,7 @@ class VaultBroker extends DatabaseBroker
     public function __construct()
     {
         parent::__construct();
-        $this->user =  AccountService::get_user();
+        $this->user = AccountService::get_user();
     }
 
     public function find(): array
@@ -27,7 +27,7 @@ class VaultBroker extends DatabaseBroker
     public function create(Vault $vault): void
     {
         $this->query("INSERT INTO vault(account_id, name, username, password) VALUES (?, ?, ?, ?)", [
-            $vault->account_id,
+            $this->user->id,
             $vault->name,
             $vault->username,
             EncryptionService::encrypt($vault->password)
