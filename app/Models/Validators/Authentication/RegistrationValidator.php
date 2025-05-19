@@ -1,10 +1,11 @@
 <?php
 
-namespace Models\Validators;
+namespace Models\Validators\Authentication;
 
 use Models\Core\Entity;
 use Models\Exceptions\FormException;
 use Models\Rules\CustomRule;
+use Models\Validators\BaseAccountValidator;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
 
@@ -27,25 +28,10 @@ class RegistrationValidator extends BaseAccountValidator
             Rule::passwordCompliant(self::$invalid_pwd_message),
         ]);
 
-        self::compare_password($form);
+        self::compare_password($form, fields: ["pwd" => 'password', "confirm" => 'confirm_password']);
 
         if (!$form->verify()) {
             throw new FormException($form);
         }
-    }
-
-    private static function compare_password(Form $form): void
-    {
-        $same = $form->getValue("confirm_password") === $form->getValue("password");
-
-        if (!$same) {
-            $form->addError('confirm_password', 'The entered passwords do not match.');
-            throw new FormException($form);
-        }
-    }
-
-
-    public static function verify(Entity $submitted, Entity $stored, Form $form): void
-    {
     }
 }

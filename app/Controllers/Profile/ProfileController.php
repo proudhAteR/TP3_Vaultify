@@ -17,16 +17,20 @@ class ProfileController extends AppController
     #[Get('/')]
     public function index(): Response
     {
-        return $this->display(page: "profile", args: ["title" => "Profile", "enabled" => MfaService::enabled()]);
+        $enabled = AccountService::get_user() != null && MfaService::enabled();
+        return $this->display(
+            page: "profile",
+            args: ["title" => "Profile", "enabled" => $enabled]
+        );
     }
 
     #[Post('/upload-avatar')]
-    public function uploadAvatar(): Response
+    public function upload_avatar(): Response
     {
         $avatar = $this->request->getFiles()['avatar'];
         AccountService::update_avatar($avatar);
 
-        return $this->redirectBack($this->request);
+        return $this->go_back();
     }
 
     #[Post('/mfa')]
@@ -36,6 +40,26 @@ class ProfileController extends AppController
             $this->buildForm()
         );
 
-        return $this->redirectBack($this->request);
+        return $this->go_back();
+    }
+
+    #[Post('/update_username')]
+    public function update(): Response
+    {
+        AccountService::update_username(
+            $this->buildForm()
+        );
+
+        return $this->go_back();
+    }
+
+    #[Post('/update_password')]
+    public function update_password(): Response
+    {
+        AccountService::update_password(
+            $this->buildForm()
+        );
+
+        return $this->go_back();
     }
 }

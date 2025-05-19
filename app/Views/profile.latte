@@ -14,9 +14,10 @@
     ['title' => 'Settings', 'template' => 'actions.latte',
         'args' => [
             'actions' => [
-                ['icon' => 'user-edit', 'color' => 'primary', 'label' => 'Change avatar', 'target' => '#edit-profile-picture'],
-                ['icon' => 'phone', 'color' => 'info', 'label' => 'Update phone number', 'does' => 'profile/'],
-                ['icon' => 'key', 'color' => 'warning', 'label' => 'Change password', 'does' => 'profile/'],
+                ['icon' => 'user', 'color' => 'primary', 'label' => 'Change avatar', 'target' => '#edit-profile-picture'],
+                ['icon' => 'phone', 'color' => 'info', 'label' => 'Update phone number', 'target' => '#edit-phone'],
+                ['icon' => 'user-pen', 'color' => 'warning', 'label' => 'Change username', 'target' => '#edit-username'],
+                ['icon' => 'key', 'color' => 'warning', 'label' => 'Change password', 'target' => '#edit-password'],
                 ['icon' => 'trash-alt', 'color' => 'danger', 'label' => 'Delete account', 'does' => 'profile/']
             ]
         ]
@@ -37,7 +38,7 @@
         </div>
     </div>
 
-    <div  class="my-4 text-end">
+    <div  class="my-5 text-end">
         <button data-save form="mfa_form" class="btn btn-primary" type="submit">
             Save changes
         </button>

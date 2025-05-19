@@ -4,7 +4,7 @@ namespace Models\Services;
 
 use Models\Brokers\VaultBroker;
 use Models\Entities\Vault;
-use Models\Validators\VaultValidator;
+use Models\Validators\Vault\VaultValidator;
 use stdClass;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Form;

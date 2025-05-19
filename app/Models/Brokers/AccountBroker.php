@@ -49,4 +49,22 @@ class AccountBroker extends DatabaseBroker
         $this->query("UPDATE account SET avatar = ? WHERE id = ?", [$new, $id]);
     }
 
+    public function update_username(Account $account): void
+    {
+        $this->query("UPDATE account SET username = ?  WHERE id = ?", [
+            $account->username,
+            AccountService::get_user()->id
+        ]);
+    }
+
+    public function update_password(Account $account): void
+    {
+        $this->query("UPDATE account SET password = ? WHERE id = ?", [
+            Cryptography::hashPassword(
+                $account->password
+            ),
+            AccountService::get_user()->id
+        ]);
+    }
+
 }

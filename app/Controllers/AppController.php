@@ -16,4 +16,9 @@ class AppController extends Controller
     {
         return Passport::isAuthenticated();
     }
+
+    protected function go_back(): Response
+    {
+        return $this->redirectBack($this->request);
+    }
 }
