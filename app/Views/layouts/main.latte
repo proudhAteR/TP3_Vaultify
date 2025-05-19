@@ -32,13 +32,21 @@
 
 {block modal}
     {include components/modal.latte,
+    modal => 'edit-username',
+    title => 'Change Username',
+    action => '/profile/update-username',
+    fields => [
+        ['id' => 'username', 'name' => 'username', 'label' => 'New Username', 'value' => '']
+    ]}
+
+    {include components/modal.latte,
     modal => 'create-vault',
     title => 'Create a new vault',
     action => '/vaults/create',
     fields => [
         ['id' => 'new_name', 'name' => 'name', 'label' => 'Name'],
         ['id' => 'new_username', 'name' => 'username', 'label' => 'Username'],
-        ['id' => 'new_password', 'name' => 'password', 'label' => 'Password', 'type' => 'password']
+        ['id' => 'new_password', 'name' => 'password', 'label' => 'Password', 'type' => 'password'],
     ]}
 
     {include components/modal.latte,
