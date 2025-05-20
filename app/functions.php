@@ -6,7 +6,8 @@ use Models\Services\VaultService;
 
 function authentication_view(string $title): bool
 {
-    return strcasecmp($title, 'Login') === 0
+    return strcasecmp($title, 'Login') === 0 ||
+        strcasecmp($title, 'Mfa') === 0
         || strcasecmp($title, 'Register') === 0;
 }
 

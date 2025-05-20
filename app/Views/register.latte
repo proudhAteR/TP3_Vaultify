@@ -6,7 +6,7 @@
         <div class="bg-body login-form p-4 shadow-lg d-flex justify-content-center rounded-4 flex-column gap-2">
             <h3 class="text-center mb-4">{$title}</h3>
 
-            {include layouts/components/auth_form.latte,
+            {include layouts/components/form.latte,
             action => '/register',
             button => 'Register',
             fields => [

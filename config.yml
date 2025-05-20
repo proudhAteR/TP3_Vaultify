@@ -1,7 +1,7 @@
 application:
   project: "Vaultify"
   env: "dev"
-  contact_email: "info@ophelios.com"
+  contact_email: "christianpourlaplay@gmail.com"
   locales:
     - fr_CA
 
@@ -17,7 +17,7 @@ locale:
 mailer:
   transport: "smtp"
   from_address: "info@ophelios.com"
-  from_name: "Zephyrus"
+  from_name: "Vaultify"
   smtp:
     enabled: true
     host: "localhost"
