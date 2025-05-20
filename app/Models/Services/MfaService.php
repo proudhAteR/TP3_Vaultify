@@ -87,10 +87,14 @@ class MfaService
 
     public static function verify(Form $form): bool
     {
-        self::store_verification();
         $code = $form->getValue("code");
+        $v = self::getTfa()->verifyCode(self::get_secret(), $code);
 
-        return self::getTfa()->verifyCode(self::get_secret(), $code);
+        if ($v === true) {
+            self::store_verification();
+        }
+
+        return $v;
     }
 
 
