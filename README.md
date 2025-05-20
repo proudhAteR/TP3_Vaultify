@@ -7,7 +7,7 @@ Designed as a final project for a 2025 web development class, Vaultify aims to d
 
 ## ✨ Features
 
-- 🔒 **Multi-Factor Authentication (MFA)** integration using [robthree/twofactorauth]([https://github.com/RobThree/TwoFactorAuth](https://github.com/RobThree/TwoFactorAuth)
+- 🔒 **Multi-Factor Authentication (MFA)** integration using [robthree/twofactorauth](https://github.com/RobThree/TwoFactorAuth)
 - 🧠 **User-friendly interface**
 - 🔐 **Secure vault system** to store multiple credentials per account
 - 👤 **Profile customization** (change username, password, avatar)
