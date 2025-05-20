@@ -21,10 +21,17 @@
     <hr class="my-3">
 
     <div class="d-flex justify-content-between align-items-center">
-        <button data-trigger class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                data-bs-target="#manage-{$vault->id}">
-            Manage
-        </button>
+        <div class="btn-group d-flex gap-3" role="group">
+            <button data-trigger class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#manage-{$vault->id}">
+                Manage
+            </button>
+
+            <button data-bs-toggle="modal" data-trigger data-bs-target="#delete-{$vault->id}" type="submit"
+                    class="btn btn-sm btn-outline-danger">
+                Delete
+            </button>
+        </div>
         <small class="text-muted">Updated on {date('F j, Y', strtotime($vault->date))}</small>
     </div>
 </div>

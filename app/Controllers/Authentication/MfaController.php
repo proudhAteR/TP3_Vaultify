@@ -33,7 +33,7 @@ class MfaController extends AuthenticationController
 
     private function failed(): Response
     {
-        Flash::error("MFA failed to verify");
+        Flash::error("The given code must be invalid. Try again.");
         return $this->go_back();
     }
 }

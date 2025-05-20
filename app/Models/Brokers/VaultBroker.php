@@ -50,4 +50,8 @@ class VaultBroker extends DatabaseBroker
         ]);
     }
 
+    public function delete(int $id): void
+    {
+        $this->query("DELETE FROM vault WHERE account_id = ? AND id = ?", [$this->user->id, $id]);
+    }
 }

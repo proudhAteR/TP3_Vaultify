@@ -1,11 +1,13 @@
 {layout layouts/main.latte}
+
 {var array $vaults = get_vaults()}
+
 {block content}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pt-2">
         {foreach $vaults as $vault}
             {var array $card = [
             'title' => $vault->name,
-            'template' => 'vault.latte',
+            'template' => 'vaults/vault.latte',
             'args' => ['vault' => $vault]
             ]}
             <div class="col">

@@ -26,12 +26,22 @@ class LoginController extends AuthenticationController
         $form = $this->buildForm();
         $acc = AccountService::authenticate($form);
 
-        return MfaService::enabled($acc->id) ? $this->mfa($acc, $form) : $this->connect($acc, $form);
+        return $this->verify($acc) ? $this->mfa($acc, $form) : $this->connect($acc, $form);
     }
 
     private function mfa(Account $acc, Form $form): Response
     {
         MfaService::generate_code($acc);
         return $this->display(page: 'mfa', args: ['title' => 'Mfa', 'p' => $form->getValue('password')]);
+    }
+
+    private function verify(Account $acc): bool
+    {
+        $lastVerified = MfaService::get_verification() ?? 0;
+
+        if ($lastVerified <= 0) return true;
+
+        $withinWindow = (time() - $lastVerified) < (20 * 24 * 60 * 60);
+        return MfaService::enabled($acc->id) && !$withinWindow;
     }
 }

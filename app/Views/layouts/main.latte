@@ -22,6 +22,7 @@
 {if !authentication_view($title)}{include components/sidebar.latte}{/if}
 
 
+
 <div class="container-fluid fade-in px-5">
         {include "zf-flash"}
 
@@ -36,7 +37,7 @@
     title => 'Change Username',
     action => '/profile/update_username',
     fields => [
-        ['id' => 'username', 'name' => 'username', 'label' => 'New Username']
+    ['id' => 'username', 'name' => 'username', 'label' => 'New Username']
     ]}
 
     {include components/modal.latte,
@@ -44,9 +45,9 @@
     title => 'Create a new vault',
     action => '/vaults/create',
     fields => [
-        ['id' => 'new_name', 'name' => 'name', 'label' => 'Name'],
-        ['id' => 'new_username', 'name' => 'username', 'label' => 'Username'],
-        ['id' => 'new_password', 'name' => 'password', 'label' => 'Password', 'type' => 'password'],
+    ['id' => 'new_name', 'name' => 'name', 'label' => 'Name'],
+    ['id' => 'new_username', 'name' => 'username', 'label' => 'Username'],
+    ['id' => 'new_password', 'name' => 'password', 'label' => 'Password', 'type' => 'password'],
     ]}
 
     {include components/modal.latte,
@@ -54,7 +55,7 @@
     title => 'Update Profile Picture',
     action => '/profile/upload-avatar',
     fields => [
-        ['id' => 'avatar', 'name' => 'avatar', 'label' => 'Choose a picture', 'type' => 'file', 'required' => true]
+    ['id' => 'avatar', 'name' => 'avatar', 'label' => 'Choose a picture', 'type' => 'file', 'required' => true]
     ]}
 
     {include components/modal.latte,
@@ -62,9 +63,9 @@
     title => 'Change Password',
     action => '/profile/update_password',
     fields => [
-        ['id' => 'current_password', 'name' => 'password', 'label' => 'Current Password', 'type' => 'password', 'required' => true],
-        ['id' => 'new_password', 'name' => 'new_password', 'label' => 'New Password', 'type' => 'password', 'required' => true],
-        ['id' => 'confirm_password', 'name' => 'confirm_password', 'label' => 'Confirm New Password', 'type' => 'password', 'required' => true]
+    ['id' => 'current_password', 'name' => 'password', 'label' => 'Current Password', 'type' => 'password', 'required' => true],
+    ['id' => 'new_password', 'name' => 'new_password', 'label' => 'New Password', 'type' => 'password', 'required' => true],
+    ['id' => 'confirm_password', 'name' => 'confirm_password', 'label' => 'Confirm New Password', 'type' => 'password', 'required' => true]
     ]}
 
     {foreach get_vaults() as $vault}
@@ -73,10 +74,24 @@
         title => 'Edit Vault',
         action => "/vaults/" . $vault->id,
         fields => [
-            ['id' => $vault->id . "_name", 'name' => 'name', 'label' => 'Vault Name', 'value' => $vault->name],
-            ['id' => $vault->id . "_username", 'name' => 'username', 'label' => 'Username', 'value' => $vault->username],
-            ['id' => $vault->id . "_password", 'name' => 'password', 'label' => 'Password', 'value' => $vault->password]
+        ['id' => $vault->id . "_name", 'name' => 'name', 'label' => 'Vault Name', 'value' => $vault->name],
+        ['id' => $vault->id . "_username", 'name' => 'username', 'label' => 'Username', 'value' => $vault->username],
+        ['id' => $vault->id . "_password", 'name' => 'password', 'label' => 'Password', 'value' => $vault->password]
         ]}
+
+        {var array $card = [
+        'title' => '',
+        'template' => 'vaults/confirmation-card.latte',
+        'args' => ['vault' => $vault]
+        ]}
+
+        <div class="modal fade rounded" tabindex="-1" id="delete-{$vault->id}">
+            <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content rounded-3">
+                    {include 'components/card.latte', card => $card}
+                </div>
+            </div>
+        </div>
     {/foreach}
 {/block}
 </body>

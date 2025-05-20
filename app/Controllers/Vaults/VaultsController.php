@@ -30,9 +30,7 @@ class VaultsController extends AppController
             $this->buildForm()
         );
 
-        return $this->redirectBack(
-            $this->request
-        );
+        return $this->go_back();
     }
 
     #[Post('/{vault_id}')]
@@ -43,9 +41,15 @@ class VaultsController extends AppController
             $this->buildForm()
         );
 
-        return $this->redirectBack(
-            $this->request
-        );
+        return $this->go_back();
+    }
+
+    #[Post('/delete/{vault_id}')]
+    public function delete(int $id): Response
+    {
+        VaultService::delete($id);
+
+        return $this->go_back();
     }
 
     private function get_updated_vault(): Vault

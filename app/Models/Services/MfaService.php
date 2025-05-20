@@ -87,10 +87,10 @@ class MfaService
 
     public static function verify(Form $form): bool
     {
+        self::store_verification();
         $code = $form->getValue("code");
-        $v = self::getTfa()->verifyCode(self::get_secret(), $code);
 
-        return $v;
+        return self::getTfa()->verifyCode(self::get_secret(), $code);
     }
 
 
@@ -147,5 +147,15 @@ class MfaService
     public static function delete_temp(): void
     {
         Session::remove("temp");
+    }
+
+    private static function store_verification(): void
+    {
+        Session::set("verified_at", time());
+    }
+
+    public static function get_verification(): ?int
+    {
+        return Session::get("verified_at");
     }
 }

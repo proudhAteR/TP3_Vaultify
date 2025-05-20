@@ -81,4 +81,10 @@ class VaultService
     {
         return Session::get('vaults');
     }
+
+    public static function delete(int $id): void
+    {
+        new VaultBroker()->delete($id);
+        self::find();
+    }
 }
