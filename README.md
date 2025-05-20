@@ -1,74 +1,33 @@
-# Projet gabarit ZEPHYRUS
+# Vaultify 🔐
 
-Projet destiné à être utilisé comme base de gabarit pour les projets ZEPHYRUS.
+Vaultify is a secure and user-friendly password manager built with the [Zephyrus](https://github.com/ophelios-studio/zephyrus-framework) PHP framework.  
+Designed as a final project for a 2025 web development class, Vaultify aims to deliver a modern experience in credential storage, encryption, and account protection.
 
-## Environnement de développement (Docker)
+---
 
-### Prérequis
-Assurez-vous d'avoir le [Moteur Docker](https://www.docker.com/products/docker-desktop/) installé et à jour.
+## ✨ Features
 
-### Premier démarrage
-Copiez le fichier `.env.example` vers un fichier nommé `.env`. Lancez finalement la construction de l'environnement de développement.
+- 🔒 **Multi-Factor Authentication (MFA)** integration using [robthree/twofactorauth](https://github.com/RobThree/TwoFactorAuth)
+- 🧠 **User-friendly interface**
+- 🔐 **Secure vault system** to store multiple credentials per account
+- 👤 **Profile customization** (change username, password, avatar)
+- 🧹 **Session management** with MFA time window
+- 📧 **Email delivery** of 2FA codes
+- 🗃️ **Relational database design** (PostgreSQL)
 
-```shell
-docker compose up
-docker exec -it zephyrus_webserver composer install
-```
+---
 
-### Mise à jour des dépendances (Composer)
-```shell
-docker exec -it zephyrus_webserver composer update
-```
+## 🛠️ Tech Stack
 
-### Redémarrer la base de données (au besoin)
-```shell
-docker compose down
-docker compose up
-```
+- **Backend:** PHP (Zephyrus Framework)
+- **Frontend:** Bootstrap 5, Latte templates
+- **Authentication:** robthree/twofactorauth, PHP Sessions
+- **Database:** PostgreSQL
 
-### Activer / Désactiver Xdebug
-Par défaut, xdebug est installé, mais pas actif pour augmenter les performances en développement. Par contre, il est
-possible de l'activer et de le désactiver avec une commande. Doit être exécuté sur l'ordinateur hôte et non depuis le
-conteneur Docker (puisque le script interagit avec l'exécutable de Docker sur l'hôte).
+## 🤝 Contributions
 
-#### Activer
-```shell
-composer xdebug-enable
-```
+This is a student project, but contributions or ideas are welcome for learning purposes. Feel free to fork and play around!
 
-#### Désactiver
-```shell
-composer xdebug-disable
-```
-
-### Génération de la cache Latte
-```shell
-docker exec -it zephyrus_webserver composer latte-cache
-```
-
-### Supprimer les images Docker
-```shell
-docker rmi $(docker images -q)
-```
-
-
-## MailCatcher
-
-Par défaut, l'image Docker fourni avec Zephyrus inclus [MailCatcher](https://www.google.com/search?client=safari&rls=en&q=mailcatcher&ie=UTF-8&oe=UTF-8). Ceci
-permet de tester des courriels simplement. 
-
-Pour accéder à MailCatcher : http://localhost:1080/  
-
-```yml
-mailer:
-  transport: "smtp"
-  from_address: "info@ophelios.com"
-  from_name: "Zephyrus"
-  smtp:
-    enabled: true
-    host: "localhost"
-    port: 1025
-    encryption: "none"
-    username: ""
-    password: ""
-```
+## 🙌 Credits
+- Developed by Christian Boleku (me)
+- Built for Cégep de Sorel-Tracy – Web Development Class 2025
